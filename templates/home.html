@@ -1,0 +1,72 @@
+ {% extends 'base.html' %} {% block conteudo %}
+<section class="home">
+    <div class="home__banner">
+        <div class="wrapper">
+            <div class="home__banner-inner">
+                <img src="./../static/img/logo-banner-verde.png" alt="Logo Vôlei Brasil">
+                <button class="scrollDown">
+                            <img src="./../static/img/icon-voleyball.png" alt="Scroll Down">
+                        </button>
+            </div>
+        </div>
+    </div>
+    <div class="rank">
+        <div class="wrapper">
+            <div class="rank__inner">
+                <h2>Ranking</h2>
+                <div class="rank__inner-content">
+                    <table class="rank__inner-table" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Equipe</th>
+                                <th>Pontos</th>
+                                <th>J</th>
+                                <th>V</th>
+                                <th>D</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1º </td>
+                                <td>Osasco</td>
+                                <td>20</td>
+                                <td>4</td>
+                                <td>2</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>2º </td>
+                                <td>Sesc RJ</td>
+                                <td>19</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>3º </td>
+                                <td>Minas TC</td>
+                                <td>16</td>
+                                <td>4</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>4º </td>
+                                <td>SESI SP</td>
+                                <td>16</td>
+                                <td>4</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</section>
+{% endblock %}
