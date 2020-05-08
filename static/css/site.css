@@ -40,17 +40,53 @@ body {
 
 a {
     text-decoration: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 img {
     max-width: 100%;
 }
 
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+label {
+    font-weight: 900;
+}
+
+input {
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.3);
+    border: 1px #bdb5b5 solid;
+}
+
+input[readonly] {
+    background-color: whitesmoke;
+    cursor: default;
+}
+
 *:focus,
 button:focus {
     outline: none;
+}
+
+a,
+button,
+.btn {
+    color: #000;
+}
+
+a:hover,
+button:hover,
+.btn:hover {
+    color: #000;
 }
 
 *::after,
@@ -61,14 +97,27 @@ button:focus {
     width: 100%;
 }
 
-button {
-    cursor: pointer;
-}
-
 .wrapper {
     max-width: 1100px;
     width: 90%;
     margin: 0 auto;
+    z-index: 1;
+}
+
+.linha {
+    display: flex;
+    align-items: flex-end;
+    align-content: stretch;
+    margin: 10px 0;
+}
+
+.input-container {
+    display: flex;
+    flex-flow: column;
+}
+
+.hidden {
+    display: none;
 }
 
 .header {
@@ -191,9 +240,9 @@ button {
     padding: 50px 0;
 }
 
-.rank__inner-table {
-    width: 90%;
-    min-width: 50%;
+.table__list {
+    width: 100%;
+    /* min-width: 50%; */
     margin: auto;
     text-align: center;
     background-color: #f3f3f3;
@@ -205,8 +254,8 @@ button {
     margin: 20px 0;
 }
 
-.rank__inner-table::after,
-.rank__inner-table::before {
+.table__list::after,
+.table__list::before {
     content: '';
     background-color: #1d1a6f;
     height: 8px;
@@ -214,19 +263,228 @@ button {
     border-radius: 10px 10px 0 0;
 }
 
-.rank__inner-table::after {
+.table__list::after {
     top: 100%;
     border-radius: 0 0 10px 10px;
     transform: none;
 }
 
-.rank__inner-table thead {
+.table__list thead {
     background-color: #1d1a6f;
     color: #fff;
     padding: 10px 0;
 }
 
-.rank__inner-table thead tr th,
-.rank__inner-table tbody tr td {
+.table__list thead tr th,
+.table__list tbody tr td {
     padding: 10px 5px;
+}
+
+.table__list tbody tr {
+    position: relative;
+}
+
+.rank__inner-table tbody tr:first-child {
+    background-color: #f7b602;
+}
+
+.rank__inner-table tbody tr:nth-child(2) {
+    background-color: #c1c1c1;
+}
+
+.rank__inner-table tbody tr:nth-child(3) {
+    background-color: #e47e43;
+}
+
+.menuActions {
+    display: none;
+}
+
+.menuActions__container {
+    position: relative;
+}
+
+.menuActions {
+    background-color: #e1e1e1;
+    padding: 10px 0px;
+    max-width: 110px;
+    position: absolute;
+    z-index: 1;
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.53);
+    right: 0;
+    transform: translateY(100%) translateX(30px);
+    top: 0%;
+    opacity: 0;
+    height: 0;
+    transition: opacity 0s;
+}
+
+.menuActions.menuActions--open {
+    opacity: 1;
+    height: auto;
+    transition: opacity 0s;
+}
+
+.menuActions .icon-arrowUp {
+    position: absolute;
+    top: 0;
+    transform: translateY(-22px);
+    width: 20px;
+    height: 20px;
+    font-size: 2.8rem;
+    left: 21px;
+    color: #e1e1e1;
+}
+
+.menuActions__button {
+    padding: 0px 20px;
+    color: #000;
+}
+
+.menuActions__button:hover {
+    background-color: #1d1a6f36;
+}
+
+.login {
+    height: 100vh;
+    background-image: url(../img/officeFour.jpg);
+    display: flex;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: bottom;
+    position: relative;
+}
+
+.login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: linear-gradient(102deg, #1131a961 0%, #0b690ee0);
+}
+
+.login__inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: static;
+}
+
+.login__inner-content {
+    max-width: 400px;
+    min-height: 450px;
+    width: 90%;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 7px;
+    box-shadow: 2px 2px 23px 2px rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-flow: column;
+    align-content: stretch;
+}
+
+.login__inner-content h2 {
+    font-size: 35px;
+    margin: 10px 0 30px;
+    font-family: Bold;
+    transform: scaleY(1.2);
+}
+
+.input-container input {
+    width: 100%;
+}
+
+.inputSenha-Container {
+    position: relative;
+}
+
+.showHidePassword {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 40px;
+    background-color: #062486;
+    color: #fff;
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 5px 5px 0;
+}
+
+.login__content-form--footer {
+    margin: 30px 0px 15px;
+    justify-content: flex-end;
+}
+
+.login__content-form {
+    height: 100%;
+}
+
+.btn-submitForm {
+    background-color: #068218;
+    color: #fff;
+    font-size: 1.8rem;
+    padding: 4px 15px;
+    margin-left: auto;
+}
+
+.esqueceuSenha {
+    color: #000;
+}
+
+.esqueceuSenha:hover {
+    color: #013182;
+}
+
+input.touched:invalid {
+    border-color: red;
+}
+
+input.touched:valid {
+    border-color: green;
+}
+
+.toggle-menuActions {
+    width: 40px;
+    height: 100%;
+}
+
+.partidas {
+    height: 100%;
+    padding: 40px 0;
+}
+
+.partidas__inner h3 {
+    font-size: 4rem;
+    font-family: Bold;
+    transform: scaleY(1.1);
+}
+
+.partidas__inner-content {
+    margin: 40px 0 10px;
+}
+
+.table__list tbody tr:hover {
+    background-color: #d3d2e8;
+}
+
+.detalhes__inner-content .linha {
+    margin: 30px 0;
+}
+
+.detalhes__inner h3 {
+    font-family: Bold;
+    transform: scaleY(1.2);
+    font-size: 4rem;
+}
+
+.detalhes {
+    padding: 40px 0 10px;
 }

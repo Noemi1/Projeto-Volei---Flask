@@ -1,1 +1,96 @@
-{% extends 'base.html' %} {% block conteudo %} Partidas {% endblock %}
+{% extends 'base.html' %} {% block conteudo %}
+<section class="partidas">
+    <div class="wrapper">
+        <div class="partidas__inner">
+            <h3 class="col-lg-12 col-md-12 col-sm-12">Partidas</h3>
+            <p class="col-lg-12 col-md-12 col-sm-12">Aqui será exibido todas as partidas do 'Nome do time'</p>
+            <div class="col-lg-12 col-md-12 col-sm-12 partidas__inner-content  ">
+
+                <table class="table__list " cellspacing="0 ">
+                    <thead>
+                        <tr>
+                            <th>E. Adversária</th>
+                            <th>Sets Total</th>
+                            <th>Vencidos</th>
+                            <th>Perdidos</th>
+                            <th>Pontos Total</th>
+                            <th>Duração</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sesc Rio</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td>77</td>
+                            <td>1h25</td>
+                            <td class="menuActions__container ">
+                                <button class="toggle-menuActions " onclick="toggleMenuActions(0, this) ">
+                                <i class="fas fa-ellipsis-v "></i>
+                            </button>
+                                <div class="menuActions " menuaction="0 ">
+                                    <span class="icon-arrowUp "><i class="fas fa-caret-up "></i></span>
+                                    <a href="{{ url_for( 'detalhes') }} " class="menuActions__button ">Detalhes</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Osasco</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td>77</td>
+                            <td>1h25</td>
+                            <td class="menuActions__container ">
+                                <button class="toggle-menuActions " onclick="toggleMenuActions(1, this) ">
+                                <i class="fas fa-ellipsis-v "></i>
+                            </button>
+                                <div class="menuActions " menuaction="1 ">
+                                    <span class="icon-arrowUp "><i class="fas fa-caret-up "></i></span>
+                                    <a href="{{ url_for( 'detalhes') }} " class="menuActions__button ">Detalhes</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Minas</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td>77</td>
+                            <td>1h25</td>
+                            <td class="menuActions__container ">
+                                <button class="toggle-menuActions " onclick="toggleMenuActions(2, this) ">
+                                <i class="fas fa-ellipsis-v "></i>
+                            </button>
+                                <div class="menuActions " menuaction="2 ">
+                                    <span class="icon-arrowUp "><i class="fas fa-caret-up "></i></span>
+                                    <a href="{{ url_for( 'detalhes') }} " class="menuActions__button ">Detalhes</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sesi SP</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td>77</td>
+                            <td>1h25</td>
+                            <td class="menuActions__container ">
+                                <button class="toggle-menuActions " onclick="toggleMenuActions(3, this) ">
+                                <i class="fas fa-ellipsis-v "></i>
+                            </button>
+                                <div class="menuActions " menuaction="3 ">
+                                    <span class="icon-arrowUp "><i class="fas fa-caret-up "></i></span>
+                                    <a href="{{ url_for( 'detalhes') }} " class="menuActions__button ">Detalhes</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

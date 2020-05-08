@@ -1,1 +1,42 @@
-{% extends 'base.html' %} {% block conteudo %} Entrar {% endblock %}
+{% extends 'base.html' %} {% block conteudo %}
+
+<section class="login">
+    <div class="wrapper">
+        <div class="login__inner">
+            <div class="login__inner-content">
+                <h2 class="col-lg-12 col-md-12 col-sm-12">Entrar</h2>
+                <form action="" class="login__content-form" method="POST">
+                    <div class="linha">
+                        <div class="input-container col-lg-12 col-md-12 col-sm-12">
+                            <label for="Email">Email:</label>
+                            <input type="email" name="Email" id="Email" required placeholder="example@hotmail.com" pattern="^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$">
+                        </div>
+                    </div>
+                    <div class="linha">
+                        <div class="input-container col-lg-12 col-md-12 col-sm-12">
+                            <label for="Senha">Senha:</label>
+                            <div class="inputSenha-Container">
+                                <input type="password" name="Senha" id="Senha" required placeholder="******" class="input-password">
+                                <button type="button" class="showHidePassword" onclick="showHidePassword(this)">
+                                    <span class="showHidePassword__icon"><i class="fas fa-eye"></i></span>
+                                    <span class="showHidePassword__icon hidden"><i class="fas fa-eye-slash"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linha login__content-form--footer col-lg-12 col-md-12 col-sm-12">
+                        <div class="input-container">
+                            <button type="submit" class="btn btn-submitForm">Entrar</button>
+                        </div>
+                    </div>
+                    <div class="linha login__content-form--subfooter col-lg-12 col-md-12 col-sm-12">
+                        <div class="input-container">
+                            <a href="#" class="esqueceuSenha">Esqueceu a senha?</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
