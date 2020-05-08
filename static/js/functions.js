@@ -22,6 +22,13 @@ function fecharModal() {
     $('body').removeClass('modal--open');
 }
 
+
+function fecharMenuActions() {
+    $('.menuActions').slideUp(300);
+    $('.toggle-menuActions').removeClass('menuActions--open');
+    $('.menuActions').removeClass('menuActions--open');
+}
+
 // Esconder / Mostrar testo de senha
 function showHidePassword(element) {
     let elementAttr = $(element).siblings('.input-password').attr('type');
