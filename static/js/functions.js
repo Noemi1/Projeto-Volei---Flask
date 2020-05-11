@@ -3,12 +3,14 @@ function toggleMenuActions(menuaction, element) {
     if ($(element).hasClass('menuActions--open')) {
         $('.menuActions').slideUp(300);
         $('.toggle-menuActions').removeClass('menuActions--open');
+        $('.fecharMenuActions').removeClass('menuActions--open');
     } else {
         $('.menuActions').slideUp(300);
         $('.toggle-menuActions').removeClass('menuActions--open');
         $(element).addClass('menuActions--open');
         $(element).siblings('.menuActions').addClass('menuActions--open');
         $(element).siblings('.menuActions').slideDown(300);
+        $('.fecharMenuActions').addClass('menuActions--open');
     }
 }
 
@@ -27,6 +29,7 @@ function fecharMenuActions() {
     $('.menuActions').slideUp(300);
     $('.toggle-menuActions').removeClass('menuActions--open');
     $('.menuActions').removeClass('menuActions--open');
+    $('.fecharMenuActions').removeClass('menuActions--open');
 }
 
 // Esconder / Mostrar testo de senha

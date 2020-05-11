@@ -10,7 +10,7 @@
             </div>
         </div>
     </div>
-    <div class="rank"id="rank">
+    <div class="rank" id="rank">
         <div class="wrapper">
             <div class="rank__inner">
                 <h2>Ranking</h2>
@@ -99,6 +99,7 @@
                                         <span class="icon-arrowUp"><i class="fas fa-caret-up"></i></span>
                                         <a href="{{ url_for('partidas') }}" class="menuActions__button">Partidas</a>
                                     </div>
+                                    <button class="fecharMenuActions" onclick="fecharMenuActions()"></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -111,5 +112,4 @@
     </div>
 
 </section>
-<button class="fecharMenuActions" onclick="fecharMenuActions()"></button> 
 {% endblock %}

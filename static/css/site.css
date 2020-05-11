@@ -310,7 +310,7 @@ button:hover,
     padding: 10px 0px;
     max-width: 110px;
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.53);
     right: 0;
     transform: translateY(100%) translateX(30px);
@@ -423,7 +423,9 @@ button:hover,
     color: #fff;
 }
 
-.btn-submitForm:hover {color: #fff;}
+.btn-submitForm:hover {
+    color: #fff;
+}
 
 .login__content-form--footer {
     margin: 30px 0px 15px;
@@ -461,6 +463,8 @@ input.touched:valid {
 .toggle-menuActions {
     width: 40px;
     height: 100%;
+    z-index: 2;
+    position: relative;
 }
 
 .partidas {
@@ -493,7 +497,7 @@ input.touched:valid {
 }
 
 .detalhes {
-    padding: 40px 0 10px;
+    padding: 40px 0;
 }
 
 .fecharMenuActions {
@@ -503,4 +507,13 @@ input.touched:valid {
     width: 100vw;
     height: 100vh;
     z-index: 1;
+    display: none;
+}
+
+.fecharMenuActions.menuActions--open {
+    display: block;
+}
+
+td.menuActions__container {
+    width: 30px;
 }
