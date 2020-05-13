@@ -517,3 +517,10 @@ input.touched:valid {
 td.menuActions__container {
     width: 30px;
 }
+
+span.title {
+    font-weight: 900;
+    font-size: 30px;
+    display: block;
+    margin: 10px 10px 20px;
+}
