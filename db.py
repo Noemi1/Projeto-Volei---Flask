@@ -3,9 +3,14 @@ import sqlite3
 from flask import g
 from sqlite3 import Error
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(_file_))
+print('BASE_DIR', BASE_DIR)
 DATABASE = os.path.join(BASE_DIR, 'database.db')
+print('DATABASE', DATABASE)
+SQL_TABELAS = os.path.join(BASE_DIR, 'sql/1-tabelas.sql')
+print('SQL_TABELAS', SQL_TABELAS)
 SQL_DIR = os.path.join(BASE_DIR, 'sql')
+print('SQL_DIR', SQL_DIR)
 
 
 def make_dicts(cursor, row):
@@ -17,32 +22,21 @@ def get_db():
     db = getattr(g, '_database', None)
     if db is None:
         db = g._database = sqlite3.connect(DATABASE)
+        print(db)
     db.row_factory = make_dicts
     return db
 
 
 def query_db(query, args=(), one=False):
+    print(args)
     cur = get_db().execute(query, args)
     rv = cur.fetchall()
     cur.close()
     return (rv[0] if rv else None) if one else rv
 
-"""
-@app.before_request
-def before_request():
-    g.db = get_db()
-    g.query_db = query_db
 
 
-@app.teardown_request
-def teardown_request(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
-"""
-
-
-if __name__ == "__main__":
+if _name_ == "_main_":
     conn = sqlite3.connect(DATABASE)
     print('Construindo Banco de Dados')
     arquivos = os.listdir(SQL_DIR)
