@@ -1,4 +1,4 @@
-CREATE TABLE Times (
+CREATE TABLE Equipes (
     Id          INTEGER PRIMARY KEY AUTOINCREMENT
     , Nome        VARCHAR(50) NOT NULL UNIQUE
     , Sigla       VARCHAR(10) NOT NULL UNIQUE
@@ -17,7 +17,7 @@ CREATE TABLE  Membros (
     , Posicao     VARCHAR(100) NOT NULL
     , Camisa      INT NOT NULL
     , Time_Id     INTEGER NOT NULL
-    , FOREIGN KEY (Time_Id) REFERENCES Times (id)
+    , FOREIGN KEY (Time_Id) REFERENCES Equipes (id)
 );
 
 
@@ -37,6 +37,6 @@ CREATE TABLE  Partidas (
     , SetsPerdidos INT NOT NULL
     , ArbitroPrincipal TEXT NOT NULL
     , FiscalRede TEXT NOT NULL
-    , FOREIGN KEY (TimeCasa_Id) REFERENCES times (id)
-    , FOREIGN KEY (TimeVisitantes_Id) REFERENCES times (id)
+    , FOREIGN KEY (TimeCasa_Id) REFERENCES Equipes (id)
+    , FOREIGN KEY (TimeVisitantes_Id) REFERENCES Equipes (id)
 );

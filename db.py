@@ -3,7 +3,7 @@ import sqlite3
 from flask import g
 from sqlite3 import Error
 
-BASE_DIR = os.path.dirname(os.path.abspath(_file_))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 print('BASE_DIR', BASE_DIR)
 DATABASE = os.path.join(BASE_DIR, 'database.db')
 print('DATABASE', DATABASE)
@@ -36,7 +36,7 @@ def query_db(query, args=(), one=False):
 
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     conn = sqlite3.connect(DATABASE)
     print('Construindo Banco de Dados')
     arquivos = os.listdir(SQL_DIR)

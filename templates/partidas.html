@@ -30,8 +30,6 @@
                     </a>
                 </div>
                 <nav class="header__navigation">
-                    <a href="{{ url_for('partidas') }}">Partidas</a>
-                    <a href="{{ url_for('detalhes') }}">Detalhes</a>
                     <a href="{{ url_for('entrar') }}">Login</a>
                 </nav>
             </div>
@@ -42,13 +40,13 @@
             <div class="wrapper">
                 <div class="partidas__inner">
                     <h3 class="col-lg-12 col-md-12 col-sm-12">Partidas</h3>
-                    <p class="col-lg-12 col-md-12 col-sm-12">Aqui será exibido todas as partidas do 'Nome do time'</p>
+                    <p class="col-lg-12 col-md-12 col-sm-12">Aqui será exibido todas as partidas do time <strong>{{ casa['Nome'] }}</strong></p>
                     <div class="col-lg-12 col-md-12 col-sm-12 partidas__inner-content ">
 
                         <table class="table__list" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Casa (Id)</th>
+                                    <th>Casa</th>
                                     <th>Visitante (Id)</th>
                                     <th>Data</th>
                                     <th>Vencedor</th>
@@ -57,13 +55,11 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-
-                                {% for i in partidas %}
+                            <tbody> {% for i in partidas %}
                                 <tr>
-                                    <td>{{ i['TimeCasa_Id'] }}</td>
+                                    <td>{{ casa['Nome'] }}</td>
                                     <td>{{ i['TimeVisitantes_Id'] }}</td>
-                                    <td>{{ i['Data'] }}</td>
+                                    <td>{{ i['DataJogo'] }}</td>
                                     <td>{{ i['Vencedor'] }}</td>
                                     <td>{{ i['Duracao'] }}</td>
                                     <td>{{ i['SetsTotal'] }}</td>
@@ -73,63 +69,12 @@
                                             </button>
                                         <div class="menuActions" menuaction="0">
                                             <span class="icon-arrowUp"><i class="fas fa-caret-up"></i></span>
-                                            <a href="{{ url_for( 'detalhes') }}" class="menuActions__button">Detalhes</a>
+                                            <a href="{{ url_for( 'detalhes', detalhes=i['Id']) }}" class="menuActions__button">Detalhes</a>
                                         </div>
                                     </td>
                                 </tr>
 
                                 {%endfor%}
-                                <!-- <tr>
-                                    <td>Osasco</td>
-                                    <td>3</td>
-                                    <td>3</td>
-                                    <td>0</td>
-                                    <td>77</td>
-                                    <td>1h25</td>
-                                    <td class="menuActions__container">
-                                        <button class="toggle-menuActions" onclick="toggleMenuActions(1, this)">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </button>
-                                        <div class="menuActions" menuaction="1">
-                                            <span class="icon-arrowUp"><i class="fas fa-caret-up"></i></span>
-                                            <a href="{{ url_for( 'detalhes') }}" class="menuActions__button">Detalhes</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Minas</td>
-                                    <td>3</td>
-                                    <td>3</td>
-                                    <td>0</td>
-                                    <td>77</td>
-                                    <td>1h25</td>
-                                    <td class="menuActions__container">
-                                        <button class="toggle-menuActions" onclick="toggleMenuActions(2, this)">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </button>
-                                        <div class="menuActions" menuaction="2">
-                                            <span class="icon-arrowUp"><i class="fas fa-caret-up"></i></span>
-                                            <a href="{{ url_for( 'detalhes') }}" class="menuActions__button">Detalhes</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Sesi SP</td>
-                                    <td>3</td>
-                                    <td>3</td>
-                                    <td>0</td>
-                                    <td>77</td>
-                                    <td>1h25</td>
-                                    <td class="menuActions__container">
-                                        <button class="toggle-menuActions" onclick="toggleMenuActions(3, this)">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </button>
-                                        <div class="menuActions" menuaction="3">
-                                            <span class="icon-arrowUp"><i class="fas fa-caret-up"></i></span>
-                                            <a href="{{ url_for( 'detalhes') }}" class="menuActions__button">Detalhes</a>
-                                        </div>
-                                    </td>
-                                </tr> -->
                             </tbody>
                         </table>
                     </div>

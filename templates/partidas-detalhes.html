@@ -30,8 +30,6 @@
                     </a>
                 </div>
                 <nav class="header__navigation">
-                    <a href="{{ url_for('partidas') }}">Partidas</a>
-                    <a href="{{ url_for('detalhes') }}">Detalhes</a>
                     <a href="{{ url_for('entrar') }}">Login</a>
                 </nav>
             </div>
@@ -41,119 +39,135 @@
 
         <section class="detalhes">
             <div class="wrapper">
-
                 <div class="detalhes__inner">
                     <h3 class="col-lg-12 col-md-12 col-sm-12 ">Detalhes</h3>
-                    <p class="col-lg-12 col-md-12 col-sm-12">Aqui será exibido os detalhes da partida 'Adversario X Equipe'
+                    <p class="col-lg-12 col-md-12 col-sm-12">Aqui será exibido os detalhes da partida <strong> {{ timeCasa['Nome'] }} -  {{ timeCasa['Sigla'] }}  x {{ timeAdversario['Nome'] }} -  {{ timeAdversario['Sigla'] }} </strong>
                     </p>
                     <div class="detalhes__inner-content">
                         <div class="linha">
-                            <div class="input-container col-lg-12 col-md-12 col-sm-12">
-                                <label for="Adversario">Esquipe Arversaria </label>
-                                <input type="text" name="Adversario" id="Adversario" value="Nome do Adversário" readonly>
+                            <div class="input-container col-lg-10 col-md-10 col-sm-10">
+                                <label for="casaNome">Equipe da Casa </label>
+                                <input type="text" name="casaNome" id="casaNome" value="{{ timeCasa['Nome'] }}" readonly>
+                            </div>
+                            <p> <strong> - </strong></p>
+                            <div class="input-container col-lg-2 col-md-2 col-sm-2">
+                                <label for="casaSigla"></label>
+                                <input type="text" name="casaSigla" id="casaSigla" value="{{ timeCasa['Sigla'] }}" readonly>
+                            </div>
+                        </div>
+                        <div class="linha">
+                            <div class="input-container col-lg-10 col-md-10 col-sm-10">
+                                <label for="AdversarioNome">Equipe Adversária </label>
+                                <input type="text" name="AdversarioNome" id="AdversarioNome" value="{{ timeAdversario['Nome'] }}" readonly>
+                            </div>
+                            <p> <strong> - </strong></p>
+                            <div class="input-container col-lg-2 col-md-2 col-sm-2">
+                                <label for="AdversarioSigla"></label>
+                                <input type="text" name="AdversarioSigla" id="AdversarioSigla" value="{{ timeAdversario['Sigla'] }}" readonly>
                             </div>
                         </div>
                         <div class="linha">
                             <div class="input-container col-lg-4 col-md-4 col-sm-12">
                                 <label for="Local">Local</label>
-                                <input type="text" name="Local" id="Local" value="Ginásio Abaeté" readonly>
+                                <input type="text" name="Local" id="Local" value="{{ detalhes['LocalJogo'] }}" readonly>
                             </div>
                             <div class="input-container col-lg-4 col-md-4 col-sm-12">
-                                <label for="Horario">Horário</label>
-                                <input type="text" name="Horario" id="Horario" value="15h30" readonly>
+                                <label for="Horario">Duração</label>
+                                <input type="time" name="Duracao" id="Horario" value="{{ detalhes['Horario'] }}" readonly>
                             </div>
                             <div class="input-container col-lg-4 col-md-4 col-sm-12">
                                 <label for="Data">Data</label>
-                                <input type="date" name="Data" id="Data" value="2020-01-01" readonly>
+                                <input type="date" name="Data" id="Data" value="{{ detalhes['DataJogo'] }}" readonly>
                             </div>
                         </div>
                         <div class="linha">
                             <div class="input-container col-lg-6 col-md-6 col-sm-12">
                                 <label for="SetsT">1º Arbitro</label>
-                                <input type="text" name="SetsT" id="SetsT" value="Ana Top" readonly>
+                                <input type="text" name="SetsT" id="SetsT" value="{{ detalhes['ArbitroPrincipal'] }}" readonly>
                             </div>
                             <div class="input-container col-lg-6 col-md-6 col-sm-12">
                                 <label for="Vencidos">2º Arbitro</label>
-                                <input type="text" name="Vencidos" id="Vencidos" value="João Top" readonly>
+                                <input type="text" name="Vencidos" id="Vencidos" value="{{ detalhes['FiscalRede'] }}" readonly>
                             </div>
                         </div>
                         <div class="linha">
                             <div class="input-container col-lg-4 col-md-4 col-sm-12">
                                 <label for="SetsT">Total de Sets</label>
-                                <input type="text" name="SetsT" id="SetsT" value="5" readonly>
+                                <input type="text" name="SetsT" id="SetsT" value="{{ detalhes['SetsTotal'] }}" readonly>
                             </div>
                             <div class="input-container col-lg-4 col-md-4 col-sm-12">
                                 <label for="Vencidos">Vencidos</label>
-                                <input type="text" name="Vencidos" id="Vencidos" value="3" readonly>
+                                <input type="text" name="Vencidos" id="Vencidos" value="{{ detalhes['SetsVencidos'] }}" readonly>
                             </div>
                             <div class="input-container col-lg-4 col-md-4 col-sm-12">
                                 <label for="Perdidos">Perdidos</label>
-                                <input type="text" name="Perdidos" id="Perdidos" value="2" readonly>
+                                <input type="text" name="Perdidos" id="Perdidos" value="{{ detalhes['SetsPerdidos'] }}" readonly>
                             </div>
                         </div>
                         <div class="linha">
+                            <div class="input-container col-lg-6 col-md-6 col-sm-6">
+                                <label for="PontosCasa">Total de Pontos <smaller>(da casa)</smaller></label>
+                                <input type="text" name="PontosCasa" id="PontosCasa" value="{{ detalhes['Pontos_Casa'] }}" readonly>
+                            </div>
+                            <div class="input-container col-lg-6 col-md-6 col-sm-6">
+                                <label for="PontosVisitantes">Total de Pontos <smaller>(do convidado)</smaller></label>
+                                <input type="text" name="PontosVisitantes" id="PontosVisitantes" value="{{ detalhes['Pontos_Visitante'] }}" readonly>
+                            </div>
+                        </div>
+                        <div class="linha linha--table">
 
                             <div class="input-container col-lg-12 col-md-12 col-sm-12">
-                                <span class="title">Jogadores</span>
+                                <span class="title">Equipe da casa</span>
                                 <table class="table__list" cellspacing="0">
 
                                     <thead>
                                         <tr>
+                                            <th>Id</th>
                                             <th>Jogador</th>
                                             <th>Apelido</th>
                                             <th>Posição</th>
-                                            <th>Camisa</th>
+                                            <th>Nº Camisa</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {% for casa in equipeCasa %}
                                         <tr>
-                                            <td>Danielle Lins</td>
-                                            <td>Dani Lins</td>
-                                            <td>Levantadora</td>
-                                            <td>7</td>
+                                            <td>{{ casa['Id'] }}</td>
+                                            <td>{{ casa['Nome'] }}</td>
+                                            <td>{{ casa['Apelido'] }}</td>
+                                            <td>{{ casa['Posicao'] }}</td>
+                                            <td>{{ casa['Camisa'] }}</td>
                                         </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="linha linha--table">
+
+                            <div class="input-container col-lg-12 col-md-12 col-sm-12">
+                                <span class="title">Equipe convidada </span>
+                                <table class="table__list" cellspacing="0">
+
+                                    <thead>
                                         <tr>
-                                            <td>Thaisa Mendes</td>
-                                            <td>Thaisa</td>
-                                            <td>Central</td>
-                                            <td>5</td>
+                                            <th>Id</th>
+                                            <th>Jogador</th>
+                                            <th>Apelido</th>
+                                            <th>Posição</th>
+                                            <th>Nº Camisa</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for casaConvidada in equipeAdversaria %}
                                         <tr>
-                                            <td>Fabiana Araújo</td>
-                                            <td>Fabi</td>
-                                            <td>Central</td>
-                                            <td>1</td>
+                                            <td>{{ casaConvidada['Id'] }}</td>
+                                            <td>{{ casaConvidada['Nome'] }}</td>
+                                            <td>{{ casaConvidada['Apelido'] }}</td>
+                                            <td>{{ casaConvidada['Posicao'] }}</td>
+                                            <td>{{ casaConvidada['Camisa'] }}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Tandara Caixeta</td>
-                                            <td>Tandara</td>
-                                            <td>Oposta</td>
-                                            <td>19</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Natalia Zílio</td>
-                                            <td>Natalia</td>
-                                            <td>Ponteira</td>
-                                            <td>12</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gabriella Guimarães</td>
-                                            <td>Gabi Guimarães</td>
-                                            <td>Ponteira</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fabiana Alvin</td>
-                                            <td>Fabizinha</td>
-                                            <td>Líbero</td>
-                                            <td>3</td>
-                                        </tr>
-                                        <tr>
-                                            <td>José Roberto Guimarães</td>
-                                            <td>Zé Roberto</td>
-                                            <td>Técnico</td>
-                                            <td>0</td>
-                                        </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>

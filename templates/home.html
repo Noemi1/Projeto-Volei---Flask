@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
     <title>Volei Brasil - {{ title }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="../static/css/bootstrap.css">
@@ -30,8 +30,6 @@
                     </a>
                 </div>
                 <nav class="header__navigation">
-                    <a href="{{ url_for('partidas') }}">Partidas</a>
-                    <a href="{{ url_for('detalhes') }}">Detalhes</a>
                     <a href="{{ url_for('entrar') }}">Login</a>
                 </nav>
             </div>
@@ -60,6 +58,7 @@
                                     <tr>
                                         <th></th>
                                         <th></th>
+                                        <th>Id</th>
                                         <th>Nome</th>
                                         <th>Sigla</th>
                                         <th>Pontos</th>
@@ -70,30 +69,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
-
-                                    {% for equipe in equipes %}
-                                    <tr>
-                                        <td></td>
-                                        <td class="icon-award"><i class="fas fa-award"></i></td>
-                                        <td> {{ equipe['Nome'] }}</td>
-                                        <td> {{ equipe['Sigla'] }}</td>
-                                        <td> {{ equipe['Pontos'] }}</td>
-                                        <td> {{ equipe['Jogos'] }}</td>
-                                        <td> {{ equipe['Vitorias'] }}</td>
-                                        <td> {{ equipe['Derrotas'] }}</td>
-                                        <td class="menuActions__container">
-                                            <button class="toggle-menuActions" onclick="toggleMenuActions(0, this)">
+                                    {% if equipes != null %} {% for equipe in equipes %}
+                                    <td></td>
+                                    <td class="icon-award"><i class="fas fa-award"></i></td>
+                                    <td> {{ equipe['Id'] }}</td>
+                                    <td> {{ equipe['Nome'] }}</td>
+                                    <td> {{ equipe['Sigla'] }}</td>
+                                    <td> {{ equipe['Pontos'] }}</td>
+                                    <td> {{ equipe['Jogos'] }}</td>
+                                    <td> {{ equipe['Vitorias'] }}</td>
+                                    <td> {{ equipe['Derrotas'] }}</td>
+                                    <td class="menuActions__container">
+                                        <button class="toggle-menuActions" onclick="toggleMenuActions(0, this)">
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </button>
-                                            <div class="menuActions" menuaction="0">
-                                                <span class="icon-arrowUp"><i class="fas fa-caret-up"></i></span>
-                                                <a href="{{ url_for('partidas') }}" class="menuActions__button">Partidas</a>
-                                            </div>
-                                        </td>
+                                        <div class="menuActions" menuaction="0">
+                                            <span class="icon-arrowUp"><i class="fas fa-caret-up"></i></span>
+                                            <a href="{{ url_for( 'partidas', time_id=equipe[ 'Id'] ) }}" class="menuActions__button">Partidas</a>
+                                        </div>
+                                    </td>
                                     </tr>
 
-                                    {%endfor%}
+                                    {%endfor%} {%endif%}
+
                                 </tbody>
                             </table>
 

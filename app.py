@@ -1,7 +1,7 @@
 from flask import Flask, g
 from db import query_db, get_db
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 app.app_context().push()
 
@@ -21,5 +21,5 @@ def teardown_request(exception):
 
 from controller import *
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     app.run(debug=True)
