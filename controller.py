@@ -1,45 +1,28 @@
-from flask import Flask, render_template, request
-from equipes import equipes 
-from partidas import jogos
-from membros import membros
-import json
-
-app = Flask(__name__)
-
-equip = []
-for i in equipes:
-    equipSTR = json.dumps(i)    
-    equipJSON = json.loads(equipSTR)
-    equip.append(equipJSON)
-
-
-partid = []
-for i in jogos:
-    partidSTR = json.dumps(i)    
-    partidJSON = json.loads(partidSTR)
-    partid.append(partidJSON)
-
-
-memb = []
-for i in membros:
-    membSTR = json.dumps(i)    
-    membJSON = json.loads(membSTR)
-    memb.append(membJSON)
+from flask import Flask, render_template, request, url_for
+from app import app
+from dao import listar_partidas, listar_membros, listar_times, ver_resultado, obter_time
 
 @app.route('/')
 def index():
+    equipes = listar_times()
     return render_template(
         'home.html',
         title="Página Inicial",
-        equipes=equip
-        
+        equipes=equipes,
     )
 
-@app.route('/partidas/')
+
+@app.route('/partidas') # Nao consigo colocar o /partidas/<time_id>
 def partidas():
+    time_id = request.args.get("time_id")
+    partidas = listar_partidas(time_id)
+    casa = obter_time(time_id)
+    print(partidas)
     return render_template('partidas.html',
         title="Partidas",
-        partidas=partid
+        partidas=partidas,
+        casa=casa
+        
     )
 
 @app.route('/entrar/')
@@ -48,17 +31,20 @@ def entrar():
         title="Entrar"
     )
 
-@app.route('/detalhes/')
+@app.route('/detalhes/') # Nao consigo colocar o /detalhes/<id>
 def detalhes():
+    partidaId = request.args.get("detalhes")
+    detalhesPartida = ver_resultado(partidaId)
+    equipeCasa = listar_membros(detalhesPartida['TimeCasa_Id'])
+    equipeAdversaria = listar_membros(detalhesPartida['TimeVisitantes_Id'])
+    timeCasa = obter_time(detalhesPartida['TimeCasa_Id'])
+    timeAdversario = obter_time(detalhesPartida['TimeVisitantes_Id'])
     return render_template('partidas-detalhes.html',
         title="Detalhes",
-        membrosEquipe=memb
+        equipeCasa=equipeCasa,
+        equipeAdversaria=equipeAdversaria,
+        detalhes=detalhesPartida,
+        timeCasa = timeCasa,
+        timeAdversario=timeAdversario
+
     )
-
-
-# @app.route('/partidas/<time>')
-# def detalhes():
-#     return render_template('partidas-detalhes.html',
-#         title="Detalhes",
-#         membrosEquipe=memb,
-#         partidas=partid
