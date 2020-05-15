@@ -9,8 +9,6 @@ app.app_context().push()
 def before_request():
     g.db = get_db()
     g.query_db = query_db
-    print(g.db)
-    print(g.query_db)
 
 @app.teardown_request
 def teardown_request(exception):

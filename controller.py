@@ -17,7 +17,6 @@ def partidas():
     time_id = request.args.get("time_id")
     partidas = listar_partidas(time_id)
     casa = obter_time(time_id)
-    print(partidas)
     return render_template('partidas.html',
         title="Partidas",
         partidas=partidas,

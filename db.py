@@ -4,13 +4,9 @@ from flask import g
 from sqlite3 import Error
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-print('BASE_DIR', BASE_DIR)
 DATABASE = os.path.join(BASE_DIR, 'database.db')
-print('DATABASE', DATABASE)
 SQL_TABELAS = os.path.join(BASE_DIR, 'sql/1-tabelas.sql')
-print('SQL_TABELAS', SQL_TABELAS)
 SQL_DIR = os.path.join(BASE_DIR, 'sql')
-print('SQL_DIR', SQL_DIR)
 
 
 def make_dicts(cursor, row):
