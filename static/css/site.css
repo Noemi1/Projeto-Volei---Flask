@@ -356,7 +356,6 @@ input.touched:valid {
 
 .login {
     height: 100vh;
-    background-image: url(../img/officeFour.jpg);
     display: flex;
     background-attachment: fixed;
     background-size: cover;
