@@ -30,6 +30,18 @@ def entrar():
         title="Entrar"
     )
 
+@app.route('/addTime/')
+def addTime():
+    return render_template('parts/add-time.html')
+
+@app.route('/editTime/')
+def editTime():
+    return render_template('parts/add-time.html')
+
+@app.route('/addMembro/')
+def addMembro():
+    return render_template('parts/add-membro.html')
+
 @app.route('/detalhes/') # Nao consigo colocar o /detalhes/<id>
 def detalhes():
     partidaId = request.args.get("detalhes")

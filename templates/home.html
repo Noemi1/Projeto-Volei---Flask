@@ -53,6 +53,12 @@
                     <div class="rank__inner">
                         <h2>Ranking</h2>
                         <div class="rank__inner-content">
+                            <header class="rank__inner-header">
+                                <a href="{{ url_for( 'addTime' )}}" class="btn btn-add openModal" title="Adicionar equipe">
+                                    Adicionar equipe
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </header>
                             <table class="rank__inner-table table__list" cellspacing="0">
                                 <thead>
                                     <tr>
@@ -85,7 +91,10 @@
                                             </button>
                                         <div class="menuActions" menuaction="0">
                                             <span class="icon-arrowUp"><i class="fas fa-caret-up"></i></span>
-                                            <a href="{{ url_for( 'partidas', time_id=equipe[ 'Id'] ) }}" class="menuActions__button">Partidas</a>
+                                            <a href="{{ url_for( 'partidas', time_id=equipe[ 'Id'] ) }}" class="menuActions__button" title="Ver partidas">Partidas</a>
+                                            <a href="{{ url_for( 'addMembro' ) }}" class="menuActions__button" title="Adicionar membro da equipe">Adicionar Membro</a>
+                                            <a href="{{ url_for( 'editTime' ) }}" class="menuActions__button" title="Editar dados da equipe">Editar</a>
+                                            <a href="{{ url_for( 'partidas', time_id=equipe[ 'Id'] ) }}" class="menuActions__button" title="Excluir equipe">Excluir</a>
                                         </div>
                                     </td>
                                     </tr>
@@ -94,14 +103,21 @@
 
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>
             </div>
             </div>
-
         </section>
+        <div class="modal">
+            <a class="modal-bg" onclick="fecharModal()" href="{{ url_for( 'index') }}"></a>
+            <div class="modal__inner">
+                <a href="{{ url_for( 'index') }}" class="modal-close" onclick="fecharModal()"><i class="fas fa-times"></i></a>
+                <div class="modal__inner-content">
+                    {% block addTime %} {% endblock %}
+                </div>
+            </div>
+        </div>
     </main>
     <footer class="footer">
         <div class="wrapper">

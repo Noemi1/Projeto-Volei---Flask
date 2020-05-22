@@ -1,0 +1,46 @@
+{% extends 'home.html' %} {% block addTime %}
+<script>
+    abrirModal()
+</script>
+<div class="addTime">
+    <h3 class="addTime-title">Editar</h3>
+    <form action="home.html">
+        <div class="linha">
+            <div class="input-container col-lg-10">
+                <label for="Nome">Nome:</label>
+                <input type="text" id="Nome" name="Nome" class="inputForm" title="Nome do time" required>
+            </div>
+            <p> <strong> - </strong></p>
+            <div class="input-container col-lg-2">
+                <label for="Sigla">Sigla:</label>
+                <input type="text" id="Sigla" name="Sigla" class="inputForm" title="Sigla do time, entre 2 a 4 letras" maxlength="4" minlength="2" required>
+            </div>
+        </div>
+        <div class="linha">
+            <div class="input-container col-lg-6">
+                <label for="Pontos">Pontos:</label>
+                <input type="number" id="Pontos" name="Pontos" class="inputForm" title="Pontuação do time" required>
+            </div>
+            <div class="input-container col-lg-6">
+                <label for="Jogos">Qtd de jogos:</label>
+                <input type="number" id="Jogos" name="Jogos" class="inputForm" title="Quantidade de Jogos" required>
+            </div>
+        </div>
+        <div class="linha">
+            <div class="input-container col-lg-6">
+                <label for="Vitorias">Vitórias:</label>
+                <input type="number" id="Vitorias" name="Vitorias" class="inputForm" title="Vitórias" required>
+            </div>
+            <div class="input-container col-lg-6">
+                <label for="Derrotas">Derrotas:</label>
+                <input type="number" id="Derrotas" name="Derrotas" class="inputForm" title="Derrotas" required>
+            </div>
+        </div>
+        <div class="linha">
+            <div class="input-container col-lg-12">
+                <button type="submit" class="btn btn-submit" title="Salvar dados do time">Salvar</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

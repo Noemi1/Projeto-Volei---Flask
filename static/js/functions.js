@@ -45,3 +45,16 @@ function showHidePassword(element) {
     }
     $(element).children('.showHidePassword__icon').toggleClass('hidden');
 }
+
+
+// Fechar Modal 
+function fecharModal() {
+    $('body').removeClass('modal--open');
+    $('.modal').removeClass('modal--open');
+}
+
+// Abrir modal
+function abrirModal() {
+    $('.modal').addClass('modal--open');
+    $('body').addClass('modal--open');
+}
