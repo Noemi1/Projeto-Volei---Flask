@@ -40,14 +40,14 @@
             <div class="wrapper">
                 <div class="partidas__inner">
                     <h3 class="col-lg-12 col-md-12 col-sm-12">Partidas</h3>
-                    <p class="col-lg-12 col-md-12 col-sm-12">Aqui será exibido todas as partidas do time <strong>{{ casa['Nome'] }}</strong></p>
-                    <div class="col-lg-12 col-md-12 col-sm-12 partidas__inner-content ">
-
+                    <p class="col-lg-12 col-md-12 col-sm-12">Aqui será exibido todas as partidas do time <strong>TIME CASA</strong></p>
+                    <div class="col-lg-12 col-md-12 col-sm-12 partidas__inner-content "> 
                         <table class="table__list" cellspacing="0">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Casa</th>
-                                    <th>Visitante (Id)</th>
+                                    <th>Visitante</th>
                                     <th>Data</th>
                                     <th>Vencedor</th>
                                     <th>Duracao</th>
@@ -57,7 +57,8 @@
                             </thead>
                             <tbody> {% for i in partidas %}
                                 <tr>
-                                    <td>{{ casa['Nome'] }}</td>
+                                    <td>{{ i['Id'] }}</td>
+                                    <td>{{ i['TimeCasa_Id'] }}</td>
                                     <td>{{ i['TimeVisitantes_Id'] }}</td>
                                     <td>{{ i['DataJogo'] }}</td>
                                     <td>{{ i['Vencedor'] }}</td>
@@ -69,12 +70,15 @@
                                             </button>
                                         <div class="menuActions" menuaction="0">
                                             <span class="icon-arrowUp"><i class="fas fa-caret-up"></i></span>
-                                            <a href="{{ url_for( 'detalhes', detalhes=i['Id']) }}" class="menuActions__button">Detalhes</a>
+                                            <a href="" class="menuActions__button">Adicionar</a>
+                                            <a href="/partidas/remover/{{ i['Id'] }}/" class="menuActions__button">Excluir</a>
+                                            <a href="" class="menuActions__button">Editar</a>
+                                            <a href="#" class="menuActions__button">Detalhes</a>
                                         </div>
                                     </td>
                                 </tr>
 
-                                {%endfor%}
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>

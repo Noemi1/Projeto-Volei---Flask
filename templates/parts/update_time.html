@@ -3,44 +3,43 @@
     abrirModal()
 </script>
 <div class="addTime">
-    <h3 class="addTime-title">Adicionar time</h3>
-    
+    <h3 class="addTime-title">Alterar {{time['Nome']}}</h3>
     <form action="" method="POST">
         <div class="linha">
             <div class="input-container col-lg-10">
                 <label for="Nome">Nome:</label>
-                <input type="text" id="Nome" name="Nome" class="inputForm" title="Nome do time" required>
+                <input type="text" id="Nome" name="Nome" class="inputForm" title="Nome do time" required value="{{ time['Nome'] }}">
             </div>
             <p> <strong> - </strong></p>
             <div class="input-container col-lg-2">
                 <label for="Sigla">Sigla:</label>
-                <input type="text" id="Sigla" name="Sigla" class="inputForm" title="Sigla do time, entre 2 a 4 letras" maxlength="4" minlength="2" required>
+                <input type="text" id="Sigla" name="Sigla" class="inputForm" title="Sigla do time, entre 2 a 4 letras" maxlength="4" minlength="2" required value="{{ time['Sigla'] }}">
             </div>
         </div>
 
             <div class="input-container col-lg-10">
                 <label for="Localidade">Localidade:</label>
-                <input type="text" id="Localidade" name="Localidade" class="inputForm" title="Localidade do time" required>
+                <input type="text" id="Localidade" name="Localidade" class="inputForm" title="Localidade do time" required value="{{ time['Localidade'] }}">
             </div>
 
         <div class="linha">
             <div class="input-container col-lg-6">
                 <label for="Pontos">Pontos:</label>
-                <input type="number" id="Pontos" name="Pontos" class="inputForm" title="Pontuação do time" required>
+                <input type="number" id="Pontos" name="Pontos" class="inputForm" title="Pontuação do time" required value="{{ time['Pontos'] }}">
             </div>
             <div class="input-container col-lg-6">
                 <label for="Jogos">Qtd de jogos:</label>
-                <input type="number" id="Jogos" name="Jogos" class="inputForm" title="Quantidade de Jogos" required>
+                <input type="number" id="Jogos" name="Jogos" class="inputForm" title="Quantidade de Jogos" required value="{{ time['Jogos'] }}">
             </div>
         </div>
         <div class="linha">
             <div class="input-container col-lg-6">
                 <label for="Vitorias">Vitórias:</label>
-                <input type="number" id="Vitorias" name="Vitorias" class="inputForm" title="Vitórias" required>
+                <input type="number" id="Vitorias" name="Vitorias" class="inputForm" title="Vitórias" required value="{{ time['Vitorias'] }}">
             </div>
             <div class="input-container col-lg-6">
                 <label for="Derrotas">Derrotas:</label>
-                <input type="number" id="Derrotas" name="Derrotas" class="inputForm" title="Derrotas" required>
+                <input type="number" id="Derrotas" name="Derrotas" class="inputForm" title="Derrotas" required value="{{ time['Derrotas'] }}">
             </div>
         </div>
         <div class="linha">

@@ -31,6 +31,12 @@ def query_db(query, args=(), one=False):
     return (rv[0] if rv else None) if one else rv
 
 
+def execute_db(query, args=()):
+    conn = get_db()
+    with conn:
+        cur = conn.cursor()
+        cur.execute(query, args)
+        return cur.lastrowid
 
 if __name__ == "__main__":
     conn = sqlite3.connect(DATABASE)
