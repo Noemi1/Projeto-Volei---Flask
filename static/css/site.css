@@ -697,3 +697,7 @@ body.modal--open {
 .addMembro {
     width: 100%;
 }
+
+textarea#nomeCasa {
+    height: 42px;
+}
