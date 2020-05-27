@@ -3,22 +3,20 @@
     abrirModal()
 </script>
 <div class="addTime">
-    <h3 class="addTime-title">Adicionar Partida</h3>
-    <form action="" method="POST">
+    <h3 class="addTime-title">Editar Partida</h3>
+    <form method="POST">
+
+        <input type="hidden" name="Partida_Id" value="{{ partida['Id']}}">
         <div class="linha">
 
             <div class="input-container col-lg-8">
-                <label for="nomeCasa">Time da Casa :</label>
-                <select id="nomeCasa" name="nomeCasa" class="inputForm" required>
-                    <option value=" {{casa['Id']}} ">
-                            {{casa['Nome']}}
-                    </option>
-                </select>
+                <label for="nomeCasa">Time da Casa </label>
+                <textarea id="nomeCasa" name="TimeCasa_Id" class="inputForm" readonly value="{{ casa['Id'] }} "> {{ casa['Nome'] }} </textarea>
             </div>
             <p> <strong> - </strong></p>
             <div class="input-container col-lg-4">
                 <label for="pontosCasa">Pontos Casa:</label>
-                <input type="number" id="pontosCasa" name="pontosCasa" class="inputForm" title="Localidade do time" required>
+                <input type="number" id="pontosCasa" name="Pontos_Casa" class="inputForm" title="Localidade do time" value="{{ partida['Pontos_Casa']}}" required>
             </div>
 
         </div>
@@ -27,18 +25,18 @@
 
             <div class="input-container col-lg-8">
                 <label for="nomeVisitante">Time visitante:</label>
-                <select class="inputForm" name="nomeVisitante" required>
+                <select class="inputForm" name="TimeVisitantes_Id">
                     <option value="">Selecione...</option>
-                    {% for i in visita %}
-                    <option value="{{i['Id']}}">
-                        {{i['Nome']}}
+                    {% for t in times %}
+                    <option value=" {{ t['Id'] }}">
+                        {{ t['Nome'] }}
                     </option>
                     {% endfor %}
                 </select>
             </div>
             <div class="input-container col-lg-4">
-                <label for="pontosVisitantes">Pontos Visitantes:</label>
-                <input type="number" id="pontosVisitantes" name="pontosVisitantes" class="inputForm" title="Pontuação do time" required>
+                <label for="PontosVisitante">Pontos Visitantes:</label>
+                <input type="number" id="pontosVisitantes" name="Pontos_Visitante" class="inputForm" title="Pontuação do time" required value="{{ partida['Pontos_Casa'] }}">
             </div>
 
         </div>
@@ -46,15 +44,15 @@
 
             <div class="input-container col-lg-4">
                 <label for="data">Data:</label>
-                <input type="date" id="data" name="data" class="inputForm" title="Quantidade de Jogos" required>
+                <input type="date" id="data" name="DataJogo" class="inputForm" title="Quantidade de Jogos" required value="{{ partida['DataJogo']}}">
             </div>
             <div class="input-container col-lg-5">
                 <label for="localpartida">Local da Partida:</label>
-                <input type="text" id="localpartida" name="localpartida" class="inputForm" title="Derrotas" required>
+                <input type="text" id="localpartida" name="LocalJogo" class="inputForm" title="Derrotas" required value="{{ partida['LocalJogo']}}">
             </div>
             <div class="input-container col-lg-3">
                 <label for="duracao">Duração:</label>
-                <input type="time" id="duracao" name="duracao" class="inputForm" title="Derrotas" required>
+                <input type="time" id="duracao" name="Duracao" class="inputForm" title="Derrotas" required value="{{ partida['Duracao'] }}">
             </div>
 
         </div>
@@ -63,17 +61,17 @@
 
             <div class="input-container col-lg-4">
                 <label for="setstotal">Sets Totais:</label>
-                <input type="number" id="setstotal" name="setstotal" class="inputForm" title="Derrotas" required>
+                <input type="number" id="setstotal" name="SetsTotal" class="inputForm" title="Derrotas" required value="{{ partida['SetsTotal']}}">
             </div>
 
             <div class="input-container col-lg-4">
                 <label for="setsvencidos">Sets Vencidos:</label>
-                <input type="number" id="setsvencidos" name="setsvencidos" class="inputForm" title="Derrotas" required>
+                <input type="number" id="setsvencidos" name="SetsVencidos" class="inputForm" title="Derrotas" required value="{{ partida['SetsVencidos']}}">
             </div>
 
             <div class="input-container col-lg-4">
                 <label for="setsperdidos">Sets Perdidos:</label>
-                <input type="number" id="setsperdidos" name="setsperdidos" class="inputForm" title="Derrotas" required>
+                <input type="number" id="setsperdidos" name="SetsPerdidos" class="inputForm" title="Derrotas" required value="{{ partida['SetsPerdidos']}}">
             </div>
 
         </div>
@@ -82,19 +80,19 @@
 
             <div class="input-container col-lg-5">
                 <label for="arbitro">Arbitro:</label>
-                <input type="text" id="arbitro" name="arbitro" class="inputForm" title="Derrotas" required>
+                <input type="text" id="arbitro" name="ArbitroPrincipal" class="inputForm" title="Derrotas" required value="{{ partida['ArbitroPrincipal']}}">
             </div>
 
             <div class="input-container col-lg-5">
                 <label for="fiscal">Fiscal:</label>
-                <input type="text" id="fiscal" name="fiscal" class="inputForm" title="Derrotas" required>
+                <input type="text" id="fiscal" name="FiscalRede" class="inputForm" title="Derrotas" required value="{{ partida['FiscalRede']}}">
             </div>
 
         </div>
         <div class="linha">
             <div class="input-container col-lg-5">
                 <label for="vencedor">Vencedor:</label>
-                <input type="text" id="vencedor" name="vencedor" class="inputForm" title="Derrotas" required>
+                <input type="text" id="vencedor" name="Vencedor" class="inputForm" title="Derrotas" required value="{{ partida['Vencedor']}}">
             </div>
         </div>
 

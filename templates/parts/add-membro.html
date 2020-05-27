@@ -5,7 +5,8 @@
 <div class="addMembro">
     <h3 class="addTime-title">Adicionar Membro</h3>
 
-    <form action="home.html">
+    <form action="" method="POST">
+        <input type="hidden" name="Time_Id" value="{{time_id}}">
         <div class="linha">
             <div class="input-container col-lg-6">
                 <label for="Nome">Nome:</label>
@@ -36,7 +37,7 @@
         </div>
         <div class="linha">
             <div class="input-container col-lg-12">
-                <button type="submit" class="btn btn-submit" title="Salvar dados do time">Salvar</button>
+                <button type="submit" class="btn btn-submit" title="Salvar dados do time" value="{{time}}">Salvar</button>
             </div>
         </div>
     </form>

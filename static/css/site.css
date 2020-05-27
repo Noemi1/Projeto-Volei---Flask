@@ -62,11 +62,13 @@ label {
 }
 
 input,
-select {
+select,
+textarea {
     padding: 8px;
     border-radius: 4px;
     box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.3);
     border: 1px #bdb5b5 solid;
+    resize: none;
 }
 
 input[readonly] {
@@ -602,7 +604,7 @@ body.modal--open {
 }
 
 .modal__inner {
-    max-width: 500px;
+    max-width: 600px;
     width: 90%;
     position: relative;
     display: flex;
@@ -645,6 +647,7 @@ body.modal--open {
     padding: 10px 20px;
     display: flex;
     align-items: stretch;
+    max-height: 90vh;
 }
 
 .modal-close:hover {
