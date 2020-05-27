@@ -1,0 +1,46 @@
+{% extends 'home.html' %} {% block addTime %}
+<script>
+    abrirModal()
+</script>
+<div class="addMembro">
+    <h3 class="addTime-title">Editar Membro</h3>
+
+    <form action="" method="POST">
+        <div class="linha">
+
+
+            <div class="input-container col-lg-6">
+                <label for="Nome">Nome:</label>
+                <input type="text" id="Nome" name="Nome" class="inputForm" title="Nome do membro da equipe" required value="{{ membro['Nome'] }}">
+            </div>
+            <div class="input-container col-lg-6">
+                <label for="Apelido">Apelido:</label>
+                <input type="text" id="Apelido" name="Apelido" class="inputForm" title="Apelido do jogador" required value="{{ membro['Apelido'] }}">
+            </div>
+        </div>
+        <div class="linha">
+            <div class="input-container col-lg-8">
+                <label for="Posicao">Posição:</label>
+                <select name="Posicao" id="Posicao" class="inputForm" required>
+                    <option value="Levantadora">Levantadora</option>
+                    <option value="Oposta">Oposta</option>
+                    <option value="Central">Central</option>
+                    <option value="Libero">Líbero</option>
+                    <option value="Ponteira">Ponteira</option>
+                    <option value="Tecnico">Técnico</option>
+                    <option value="Outro">Outro</option>
+                </select>
+            </div>
+            <div class="input-container col-lg-4">
+                <label for="Camisa">Nº Camisa:</label>
+                <input type="number" id="Camisa" name="Camisa" class="inputForm" title="Número da camisa" required value="{{membro['Camisa']}}">
+            </div>
+        </div>
+        <div class="linha">
+            <div class="input-container col-lg-12">
+                <button type="submit" class="btn btn-submit" title="Salvar dados do time" value="{{time}}">Salvar</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

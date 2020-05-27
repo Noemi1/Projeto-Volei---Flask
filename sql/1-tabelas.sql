@@ -12,7 +12,7 @@ CREATE TABLE Equipes (
 
 CREATE TABLE  Membros (
     Id          INTEGER PRIMARY KEY 
-    , Nome        VARCHAR(50) NOT NULL UNIQUE
+    , Nome        VARCHAR(50) NOT NULL
     , Apelido     VARCHAR(50) NOT NULL
     , Posicao     VARCHAR(100) NOT NULL
     , Camisa      INT NOT NULL

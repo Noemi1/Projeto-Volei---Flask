@@ -51,7 +51,7 @@
             <div class="rank" id="rank">
                 <div class="wrapper">
                     <div class="rank__inner">
-                        <h2>Ranking</h2>
+                        <h2>Membros</h2>
                         <div class="rank__inner-content">
                             <header class="rank__inner-header">
                                 <a href="{{ url_for( 'add_membro', time_id=time_id )}}" class="btn btn-add openModal" title="Adicionar membro">
@@ -85,7 +85,7 @@
                                             </button>
                                         <div class="menuActions" menuaction="0">
                                             <span class="icon-arrowUp"><i class="fas fa-caret-up"></i></span>
-                                            <a href="" class="menuActions__button" title="Editar dados da membro">Editar</a>
+                                            <a href="{{ url_for('update_membro', membro_id=membro['Id'])}}" class="menuActions__button" title="Editar dados da membro">Editar</a>
                                             <a href="{{ url_for('delete_membro', membro=membro['Id'])}}" class="menuActions__button">Excluir</a>
                                         </div>
                                     </td>

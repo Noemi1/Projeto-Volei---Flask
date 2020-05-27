@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect
 from app import app
-from dao import listar_partidas, listar_membros, listar_times, ver_resultado, obter_time, novo_time, remover_time, nova_partida, remover_partida, update_time, obter_partida, update_partida, novo_membro, obter_membros, remover_membro
+from dao import listar_partidas, listar_membros, listar_times, ver_resultado, obter_time, novo_time, remover_time, nova_partida, remover_partida, update_time, obter_partida, update_partida, novo_membro, obter_membros, remover_membro, membro_obter, alterar_membro
 
 @app.route('/')
 def index():
@@ -286,3 +286,32 @@ def delete_membro():
     membro = request.args.get('membro')
     remover_membro(membro)
     return redirect('/')
+
+
+@app.route('/updatemembro/', methods=['GET', 'POST'])
+def update_membro():
+    membro_id = request.args.get('membro_id')
+    membro = membro_obter(membro_id)
+    print(membro)
+
+    if request.method == 'POST':
+        form = request.form
+
+        Nome = form.get('Nome')
+        Apelido = form.get('Apelido')
+        Posicao = form.get('Posicao')
+        Camisa = form.get('Camisa')
+
+        alterar_membro(
+            Nome,
+            Apelido,
+            Posicao,
+            Camisa,
+            membro_id
+        )
+        return redirect('/')
+
+    return render_template(
+        'parts/update-membro.html',
+        membro=membro
+    )

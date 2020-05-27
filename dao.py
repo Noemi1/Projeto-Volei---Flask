@@ -167,3 +167,23 @@ def remover_membro(membro):
         ''',
         (membro)
     )
+
+def membro_obter(membro):
+    return g.query_db(
+        ''' SELECT * FROM Membros WHERE Id = ? ''',
+        [membro],
+        one=True
+    )
+
+def alterar_membro(Nome, Apalido, Posicao, Camisa, Id_Membro):
+    execute_db(
+        '''
+        UPDATE Membros
+        SET Nome = ? ,
+            Apelido = ? ,
+            Posicao = ? ,
+            Camisa = ? 
+        WHERE Id = ?
+        ''',
+        (Nome, Apalido, Posicao, Camisa, Id_Membro)
+    )
