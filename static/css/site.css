@@ -682,3 +682,14 @@ body.modal--open {
 .btn-submit:hover {
     color: #fff;
 }
+
+.rank__inner-table tbody tr:first-child .icon-award svg,
+.rank__inner-table tbody tr:nth-child(2) .icon-award svg,
+.rank__inner-table tbody tr:nth-child(3) .icon-award svg,
+.rank__inner-table tbody tr:nth-child(4) .icon-award svg {
+    display: block;
+}
+
+.icon-award svg {
+    display: none;
+}
