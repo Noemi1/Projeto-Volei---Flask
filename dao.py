@@ -10,7 +10,6 @@ def listar_membros(time_id):
 
 # --------------------------TIME -------------------
 
-
 def listar_times():
     return g.query_db(
         'SELECT * FROM Equipes ORDER BY Pontos DESC'
@@ -187,3 +186,16 @@ def alterar_membro(Nome, Apalido, Posicao, Camisa, Id_Membro):
         ''',
         (Nome, Apalido, Posicao, Camisa, Id_Membro)
     )
+
+
+def times_menosUm(time_id):
+    times = g.query_db(
+        '''
+            SELECT *
+              FROM Equipes
+             WHERE Id != ?
+        ''',
+        [time_id]
+    )
+    return times
+

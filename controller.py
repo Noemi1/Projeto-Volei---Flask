@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect
 from app import app
-from dao import listar_partidas, listar_membros, listar_times, ver_resultado, obter_time, novo_time, remover_time, nova_partida, remover_partida, update_time, obter_partida, update_partida, novo_membro, obter_membros, remover_membro, membro_obter, alterar_membro
+from dao import listar_partidas, listar_membros, listar_times, ver_resultado, obter_time, novo_time, remover_time, nova_partida, remover_partida, update_time, obter_partida, update_partida, novo_membro, obter_membros, remover_membro, membro_obter, alterar_membro, times_menosUm
 
 @app.route('/')
 def index():
@@ -110,7 +110,8 @@ def delete_partida(partida_id):
 def addpartidas():
     time_casa = request.args.get("time_id")
     casa = obter_time(time_casa)
-    visita = listar_times()
+    visita = times_menosUm(time_casa)
+    # visita = listar_times()
 
     if request.method == 'POST':
         form = request.form
