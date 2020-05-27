@@ -1,0 +1,111 @@
+{% extends 'home.html' %} {% block addTime %}
+<script>
+    abrirModal()
+</script>
+<div class="addTime">
+    <h3 class="addTime-title">Adicionar Partida</h3>
+    <form action="" method="POST">
+        <div class="linha">
+
+            <div class="input-container col-lg-8">
+                <label for="nomeCasa">Time da Casa :</label>
+                <select id="nomeCasa" name="nomeCasa" class="inputForm">
+                    <option value=" {{casa['Id']}} ">
+                            {{casa['Nome']}}
+                    </option>
+                </select>
+            </div>
+            <p> <strong> - </strong></p>
+            <div class="input-container col-lg-4">
+                <label for="pontosCasa">Pontos Casa:</label>
+                <input type="number" id="pontosCasa" name="pontosCasa" class="inputForm" title="Localidade do time" required>
+            </div>
+
+        </div>
+
+        <div class="linha">
+
+            <div class="input-container col-lg-8">
+                <label for="nomeVisitante">Time visitante:</label>
+                <select class="inputForm">
+                    <option value="">Selecione...</option>
+                    {% for i in visita %}
+                    <option value="{{i['Id']}}">
+                        {{i['Nome']}}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="input-container col-lg-4">
+                <label for="pontosVisitantes">Pontos Visitantes:</label>
+                <input type="number" id="pontosVisitantes" name="pontosVisitantes" class="inputForm" title="Pontuação do time" required>
+            </div>
+
+        </div>
+        <div class="linha">
+
+            <div class="input-container col-lg-4">
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" class="inputForm" title="Quantidade de Jogos" required>
+            </div>
+            <div class="input-container col-lg-5">
+                <label for="localpartida">Local da Partida:</label>
+                <input type="text" id="localpartida" name="localpartida" class="inputForm" title="Derrotas" required>
+            </div>
+            <div class="input-container col-lg-3">
+                <label for="duracao">Duração:</label>
+                <input type="time" id="duracao" name="duracao" class="inputForm" title="Derrotas" required>
+            </div>
+
+        </div>
+
+        <div class="linha">
+
+            <div class="input-container col-lg-4">
+                <label for="setstotal">Sets Totais:</label>
+                <input type="number" id="setstotal" name="setstotal" class="inputForm" title="Derrotas" required>
+            </div>
+
+            <div class="input-container col-lg-4">
+                <label for="setsvencidos">Sets Vencidos:</label>
+                <input type="number" id="setsvencidos" name="setsvencidos" class="inputForm" title="Derrotas" required>
+            </div>
+
+            <div class="input-container col-lg-4">
+                <label for="setsperdidos">Sets Perdidos:</label>
+                <input type="number" id="setsperdidos" name="setsperdidos" class="inputForm" title="Derrotas" required>
+            </div>
+
+        </div>
+
+        <div class="linha">
+
+            <div class="input-container col-lg-5">
+                <label for="arbitro">Arbitro:</label>
+                <input type="text" id="arbitro" name="arbitro" class="inputForm" title="Derrotas" required>
+            </div>
+
+            <div class="input-container col-lg-5">
+                <label for="fiscal">Fiscal:</label>
+                <input type="text" id="fiscal" name="fiscal" class="inputForm" title="Derrotas" required>
+            </div>
+
+        </div>
+        <div class="linha">
+            <div class="input-container col-lg-5">
+                <label for="vencedor">Vencedor:</label>
+                <input type="text" id="vencedor" name="vencedor" class="inputForm" title="Derrotas" required>
+            </div>
+        </div>
+
+
+        <div class="linha">
+
+            <div class="input-container col-lg-12">
+                <button type="submit" class="btn btn-submit" title="Salvar dados do time">Salvar</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+{% endblock %}

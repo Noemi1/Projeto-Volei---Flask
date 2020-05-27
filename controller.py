@@ -13,6 +13,79 @@ def index():
     )
 
 
+@app.route('/time/remover/<time_id>/')
+def delete_time(time_id):
+    remover_time(time_id)
+    return redirect('/')
+
+
+@app.route('/addTime/', methods=['GET', 'POST'])
+def addTime():
+
+    if request.method == 'POST':
+        form = request.form
+
+        Nome = form.get('Nome')
+        Sigla = form.get('Sigla')
+        Localidade = form.get('Localidade')
+        Pontos = form.get('Pontos')
+        Jogos = form.get('Jogos')
+        Vitorias = form.get('Vitorias')
+        Derrotas = form.get('Derrotas')
+
+        novo_time(
+            Nome,
+            Sigla,
+            Localidade,
+            Pontos,
+            Jogos,
+            Vitorias,
+            Derrotas
+        )
+        return redirect('/')
+
+    return render_template(
+        'parts/add-time.html',
+        curso={}
+    )
+
+
+@app.route('/time/alterar/', methods=['GET', 'POST'])
+def alterar_time():
+    time_id = request.args.get("time_id")
+    time = obter_time(time_id)
+
+    if request.method == 'POST':
+        form = request.form
+
+        Nome = form.get('Nome')
+        Sigla = form.get('Sigla')
+        Localidade = form.get('Localidade')
+        Pontos = form.get('Pontos')
+        Jogos = form.get('Jogos')
+        Vitorias = form.get('Vitorias')
+        Derrotas = form.get('Derrotas')
+
+        update_time(
+            Nome,
+            Sigla,
+            Localidade,
+            Pontos,
+            Jogos,
+            Vitorias,
+            Derrotas,
+            time_id
+        )
+        return redirect('/')
+
+    return render_template(
+        'parts/update_time.html',
+        time=time
+    )
+
+# ----------------------- PARTIDAS ----------------------------
+
+
 @app.route('/partidas') # Nao consigo colocar o /partidas/<time_id>
 def partidas():
     time_id = request.args.get('time_id')
@@ -20,13 +93,15 @@ def partidas():
     return render_template(
         'partidas.html',
         title="Partidas",
-        partidas=partidas,
+        partidas=partidas
     )
+
 
 @app.route('/partidas/remover/<partida_id>/')
 def delete_partida(partida_id):
     remover_partida(partida_id)
     return redirect('/')
+
 
 @app.route('/addpartidas/', methods=['GET', 'POST'])
 def addpartidas():
@@ -75,6 +150,8 @@ def addpartidas():
     )
 
 
+# --------------- ENTRAR-------------
+
 @app.route('/entrar/')
 def entrar():
     return render_template(
@@ -83,81 +160,13 @@ def entrar():
     )
 
 
-@app.route('/addTime/', methods=['GET', 'POST'])
-def addTime():
-
-    if request.method == 'POST':
-        form = request.form
-
-        Nome = form.get('Nome')
-        Sigla = form.get('Sigla')
-        Localidade = form.get('Localidade')
-        Pontos = form.get('Pontos')
-        Jogos = form.get('Jogos')
-        Vitorias = form.get('Vitorias')
-        Derrotas = form.get('Derrotas')
-
-        novo_time(
-            Nome,
-            Sigla,
-            Localidade,
-            Pontos,
-            Jogos,
-            Vitorias,
-            Derrotas
-        )
-        return redirect('/')
-
-    return render_template(
-        'parts/add-time.html',
-        curso={}
-    )
-
-
-@app.route('/time/remover/<time_id>/')
-def delete_time(time_id):
-    remover_time(time_id)
-    return redirect('/')
-
-
-@app.route('/time/alterar/', methods=['GET', 'POST'])
-def alterar_time():
-    time_id = request.args.get("time_id")
-    time = obter_time(time_id)
-
-    if request.method == 'POST':
-        form = request.form
-
-        Nome = form.get('Nome')
-        Sigla = form.get('Sigla')
-        Localidade = form.get('Localidade')
-        Pontos = form.get('Pontos')
-        Jogos = form.get('Jogos')
-        Vitorias = form.get('Vitorias')
-        Derrotas = form.get('Derrotas')
-
-        update_time(
-            Nome,
-            Sigla,
-            Localidade,
-            Pontos,
-            Jogos,
-            Vitorias,
-            Derrotas,
-            time_id
-        )
-        return redirect('/')
-
-    return render_template(
-        'parts/update_time.html',
-        time=time
-    )
-
+# --------------- MEMBROS -------------
 
 @app.route('/addMembro/')
 def addMembro():
     return render_template('parts/add-membro.html')
 
+# ------------- DETALHES --------------- 
 
 @app.route('/detalhes/') # Nao consigo colocar o /detalhes/<id>
 def detalhes():

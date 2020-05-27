@@ -53,32 +53,34 @@
                                     <th>Duracao</th>
                                     <th>Sets</th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
-                            <tbody> {% for i in partidas %}
+                            <tbody> 
+                            {% for i in partidas %}
                                 <tr>
-                                    <td>{{ i['Id'] }}</td>
-                                    <td>{{ i['TimeCasa_Id'] }}</td>
-                                    <td>{{ i['TimeVisitantes_Id'] }}</td>
-                                    <td>{{ i['DataJogo'] }}</td>
-                                    <td>{{ i['Vencedor'] }}</td>
-                                    <td>{{ i['Duracao'] }}</td>
-                                    <td>{{ i['SetsTotal'] }}</td>
+                                    <td> {{ i['Id']}} </td>
+                                    <td> {{ i['TimeCasa_Id']}} </td>
+                                    <td> {{ i['TimeVisitantes_Id']}} </td>
+                                    <td> {{ i['DataJogo']}} </td>
+                                    <td> {{ i['Vencedor']}}</td>
+                                    <td> {{ i['Duracao']}} </td>
+                                    <td> {{ i['SetsTotal']}} </td>
+                                    <td></td>
                                     <td class="menuActions__container">
                                         <button class="toggle-menuActions" onclick="toggleMenuActions(0, this)">
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </button>
                                         <div class="menuActions" menuaction="0">
                                             <span class="icon-arrowUp"><i class="fas fa-caret-up"></i></span>
-                                            <a href="" class="menuActions__button">Adicionar</a>
-                                            <a href="/partidas/remover/{{ i['Id'] }}/" class="menuActions__button">Excluir</a>
-                                            <a href="" class="menuActions__button">Editar</a>
+                                            <a href=" {{url_for('addpartidas', time_id=i['Id'])}}" class="menuActions__button">Adicionar</a>
+                                            <a href="/partidas/remover/{{i['Id']}}" class="menuActions__button">Excluir</a>
+                                            <a href="#" class="menuActions__button">Editar</a>
                                             <a href="#" class="menuActions__button">Detalhes</a>
                                         </div>
                                     </td>
                                 </tr>
-
-                                {% endfor %}
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
