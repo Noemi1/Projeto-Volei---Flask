@@ -51,11 +51,52 @@ def update_time(nome, sigla, localidade, pontos, jogos, vitorias, derrotas, time
 
 # Fim Times ------------------------------------------------------------------------------------------------------------------------------  #
 
-def listar_membros(time_id):
+# Membros ------------------------------------------------------------------------------------------------------------------------------  #
+
+def get_membros(time_id):
     return g.query_db(
         'SELECT * FROM Membros WHERE Time_Id = ?',
         [time_id]
     )
+
+def get_membro(membro_id):
+    membro = g.query_db(
+        'SELECT * FROM Membros WHERE Id = ?',
+        [membro_id],
+        one=True
+    )
+    return membro
+
+def add_membro(Nome, Apelido, Posicao, Camisa, Time_Id):
+    execute_db(
+        '''
+        INSERT INTO Membros (Nome, Apelido, Posicao, Camisa, Time_Id)
+        VALUES
+        (?, ?, ?, ?, ?) ''',
+        (Nome, Apelido, Posicao, Camisa, Time_Id)
+    )
+
+def delete_membro(membro):
+    execute_db(
+        '''
+        DELETE FROM Membros WHERE Id = ?
+        ''',
+        (membro)
+    )
+
+def update_membro(Nome, Apalido, Posicao, Camisa, Id_Membro):
+    execute_db(
+        '''
+        UPDATE Membros
+        SET Nome = ? ,
+            Apelido = ? ,
+            Posicao = ? ,
+            Camisa = ? 
+        WHERE Id = ?
+        ''',
+        (Nome, Apalido, Posicao, Camisa, Id_Membro)
+    )
+# Fim Membros ------------------------------------------------------------------------------------------------------------------------------  #
 
 
 # ----------------------------------------PARTIDAS ---------------------------
@@ -126,26 +167,15 @@ def add_partida(TimeCasa_Id,
     )
 
 # Delete Partida
-def delete_partida(partida_rowId):
-    oi =  g.query_db(
-        '''
-            SELECT *
-              FROM Partidas
-             WHERE RowId = ?
-        ''',
-        [partida_rowId],
-        one=True
-    )
-    print(oi)
+def delete_partida(id_partida):
     execute_db(
-        ''' DELETE FROM Partidas WHERE RowId = ? ''',
-        (partida_rowId)
+        ''' DELETE FROM Partidas WHERE id = ? ''',
+        (id_partida)
     )
 
 # Update Partida
-
-def update_partida(TimeCasa_Id, TimeVisitantes_Id, Pontos_Casa, Pontos_Visitante, DataJogo, LocalJogo, Duracao, SetsTotal, SetsVencidos, SetsPerdidos, ArbitroPrincipal, FiscalRede, Vencedor, Partida_rowId):
-    return execute_db(
+def update_partida(TimeCasa_Id, TimeVisitantes_Id, Pontos_Casa, Pontos_Visitante, DataJogo, LocalJogo, Duracao, SetsTotal, SetsVencidos, SetsPerdidos, ArbitroPrincipal, FiscalRede, Vencedor, id_partida):
+    execute_db(
         '''
             UPDATE Partidas
             SET 
@@ -162,24 +192,23 @@ def update_partida(TimeCasa_Id, TimeVisitantes_Id, Pontos_Casa, Pontos_Visitante
                 ArbitroPrincipal = ?,  
                 FiscalRede = ?,  
                 Vencedor = ?
-            WHERE RowId = ?
+            WHERE Id = ?
               ''',
         (TimeCasa_Id, TimeVisitantes_Id, Pontos_Casa, Pontos_Visitante, DataJogo, LocalJogo, Duracao,
-         SetsTotal, SetsVencidos, SetsPerdidos, ArbitroPrincipal, FiscalRede, Vencedor, Partida_rowId)
+         SetsTotal, SetsVencidos, SetsPerdidos, ArbitroPrincipal, FiscalRede, Vencedor, id_partida)
     )
 
 
-def ver_resultado(partida_rowId):
+def ver_resultado(id_partida):
     return g.query_db(
         '''
             SELECT *
               FROM Partidas
-             WHERE RowId = ?
+             WHERE id = ?
         ''',
-        [partida_rowId],
+        [id_partida],
         one=True
     )
-
 
 
 def obter_partida(id_partida):
@@ -189,53 +218,6 @@ def obter_partida(id_partida):
         ''',
         [id_partida],
         one=True
-    )
-
-
-def novo_membro(Nome, Apelido, Posicao, Camisa, Time_Id):
-    execute_db(
-        '''
-        INSERT INTO Membros (Nome, Apelido, Posicao, Camisa, Time_Id)
-        VALUES
-        (?, ?, ?, ?, ?) ''',
-        (Nome, Apelido, Posicao, Camisa, Time_Id)
-    )
-
-def obter_membros(time_id):
-    return g.query_db(
-        '''
-        SELECT * FROM Membros
-                    WHERE Time_Id = ?
-        ''',
-        [time_id]
-    )
-
-def remover_membro(membro):
-    execute_db(
-        '''
-        DELETE FROM Membros WHERE Id = ?
-        ''',
-        (membro)
-    )
-
-def membro_obter(membro):
-    return g.query_db(
-        ''' SELECT * FROM Membros WHERE Id = ? ''',
-        [membro],
-        one=True
-    )
-
-def alterar_membro(Nome, Apalido, Posicao, Camisa, Id_Membro):
-    execute_db(
-        '''
-        UPDATE Membros
-        SET Nome = ? ,
-            Apelido = ? ,
-            Posicao = ? ,
-            Camisa = ? 
-        WHERE Id = ?
-        ''',
-        (Nome, Apalido, Posicao, Camisa, Id_Membro)
     )
 
 

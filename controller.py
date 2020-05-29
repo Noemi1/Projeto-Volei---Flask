@@ -18,6 +18,7 @@ def listar_times():
 
 @app.route('/admin/time/novo', methods=['GET', 'POST'])
 def adicionar_time():
+    equipes = get_times()
     if request.method == 'POST':
         form = request.form
         Nome = form.get('Nome')
@@ -37,11 +38,12 @@ def adicionar_time():
             Vitorias,
             Derrotas
         )
-        return redirect('/')
+        return redirect(url_for('listar_times'))
 
     return render_template(
         'parts/add-time.html',
-        title='Adicionar'
+        title='Adicionar',
+        equipes=equipes
     )
 
 @app.route('/admin/alterar/<id_time>', methods=['GET', 'POST'])
@@ -85,11 +87,10 @@ def remover_time(id_time):
 
 # Partidas ------------------------------------------------------------------------------------------------------------------------------  #
 
-@app.route('/admin/partidas')
-def listar_partidas():
-    time_id = request.args.get('id_time')
-    partidas = get_partidas(time_id)
-    timeCasa = get_time(time_id)
+@app.route('/admin/partidas/<id_time>')
+def listar_partidas(id_time):
+    partidas = get_partidas(id_time)
+    timeCasa = get_time(id_time)
     return render_template(
         'partidas.html',
         title="Partidas",
@@ -97,12 +98,12 @@ def listar_partidas():
         timeCasa=timeCasa
     )
 
-@app.route('/admin/partidas/novo', methods=['GET', 'POST'])
-def adicionar_partida():
-    id_time = request.args.get("id_time")
+@app.route('/admin/partidas/novo/<id_time>', methods=['GET', 'POST'])
+def adicionar_partida(id_time):
     casa = get_time(id_time)
     visita = times_menosUm(id_time)
     partidas = get_partidas(id_time)
+    times = times_menosUm(id_time)
 
     if request.method == 'POST':
         form = request.form
@@ -143,23 +144,26 @@ def adicionar_partida():
         casa=casa,
         visita=visita,
         partidas=partidas,
-        timeCasa=casa
+        timeCasa=casa,
+        times=times
     )
 
-@app.route('/admin/partidas/remover/<partida_rowId>/')
-def remover_partida(partida_rowId):
-    partida = get_partida(partida_rowId)
+@app.route('/admin/partidas/remover/<id_partida>/')
+def remover_partida(id_partida):
+    partida = get_partida(id_partida)
     timeCasaId = partida['TimeCasa_Id']
-    delete_partida(partida_rowId)
+    delete_partida(id_partida)
     partidas = get_partidas(timeCasaId)
     return redirect( url_for( 'listar_partidas', id_time=timeCasaId, partidas=partidas ))
 
-@app.route('/admin/partidas/alterar/<partida_rowId>', methods=['GET', 'POST'])
-def alterar_partida(partida_rowId):
-    partida = obter_partida(partida_rowId)
-    times = get_times()
+@app.route('/admin/partidas/alterar/<id_partida>', methods=['GET', 'POST'])
+def alterar_partida(id_partida):
+    partida = obter_partida(id_partida)
     time_id = partida['TimeCasa_Id']
-    casa = get_time(time_id)
+    times = times_menosUm(time_id)
+    timeCasa = get_time(time_id)
+    partidas = get_partidas(time_id)
+
 
     if request.method == 'POST':
         form = request.form
@@ -176,7 +180,7 @@ def alterar_partida(partida_rowId):
         ArbitroPrincipal = form.get('ArbitroPrincipal')
         FiscalRede = form.get('FiscalRede')
         Vencedor = form.get('Vencedor')
-        Partida_rowId = form.get('Partida_rowId')
+        id_partida = form.get('id_partida')
 
         update_partida(
             TimeCasa_Id,
@@ -192,25 +196,25 @@ def alterar_partida(partida_rowId):
             ArbitroPrincipal,
             FiscalRede,
             Vencedor,
-            Partida_rowId
+            id_partida
         )
-        return redirect(url_for('listar_partidas/?id_time=' + TimeCasa_Id))
+        return redirect(url_for('listar_partidas', id_time=TimeCasa_Id))
 
     return render_template(
         'parts/update-partida.html',
         title='Alterar',
         partida=partida,
         times=times,
-        casa=casa,
-
+        timeCasa=timeCasa,
+        partidas=partidas
     )
 
 
-@app.route('/admin/detalhes/<partida_rowId>') 
-def detalhes(partida_rowId):
-    detalhesPartida = ver_resultado(partida_rowId)
-    equipeCasa = listar_membros(detalhesPartida['TimeCasa_Id'])
-    equipeAdversaria = listar_membros(detalhesPartida['TimeVisitantes_Id'])
+@app.route('/admin/detalhes/<id_partida>') 
+def detalhes(id_partida):
+    detalhesPartida = ver_resultado(id_partida)
+    equipeCasa = get_membros(detalhesPartida['TimeCasa_Id'])
+    equipeAdversaria = get_membros(detalhesPartida['TimeVisitantes_Id'])
     timeCasa = get_time(detalhesPartida['TimeCasa_Id'])
     timeAdversario = get_time(detalhesPartida['TimeVisitantes_Id'])
     return render_template('partidas-detalhes.html',
@@ -236,20 +240,30 @@ def entrar():
 # Fim Entrar ------------------------------------------------------------------------------------------------------------------------------  #
 
 # Membros ------------------------------------------------------------------------------------------------------------------------------  #
-@app.route('/addMembro/', methods=['GET', 'POST'])
-def add_membro():
-    time_id = request.args.get('time_id')
+@app.route('/admin/membros/<id_time>')
+def listar_membros(id_time):
+    time = get_time(id_time)
+    membros = get_membros(id_time)
+    return render_template(
+        'membros.html',
+        time=time,
+        id_time=id_time,
+        membros=membros,
+        title="Membros"
+    )
 
+@app.route('/admin/membros/novo/<id_time>', methods=['GET', 'POST'])
+def adicionar_membro(id_time):
+    membros = get_membros(id_time)
     if request.method == 'POST':
         form = request.form
-
         Nome = form.get('Nome')
         Apelido = form.get('Apelido')
         Posicao = form.get('Posicao')
         Camisa = form.get('Camisa')
         Time_Id = form.get('Time_Id')
 
-        novo_membro(
+        add_membro(
             Nome,
             Apelido,
             Posicao,
@@ -260,35 +274,24 @@ def add_membro():
 
     return render_template(
         'parts/add-membro.html',
-        time_id=time_id
+        id_time=id_time,
+        membros=membros
     )
-
-    
-@app.route('/membros')
-def membros():
-    time_id = request.args.get('time_id')
-    time = get_time(time_id)
-    membros = obter_membros(time_id)
-    return render_template(
-        'membros.html',
-        time=time,
-        time_id=time_id,
-        membros=membros,
-        title="Membros"
-    )
-
-@app.route('/deletemembro')
-def delete_membro():
-    membro = request.args.get('membro')
-    remover_membro(membro)
-    return redirect('/')
+ 
+@app.route('/admin/membros/remover/<id_membro>')
+def remover_membro(id_membro):
+    membro = get_membro(id_membro)
+    time = get_time(membro['Time_Id'])
+    timeId = time['Id']
+    delete_membro(id_membro)
+    return redirect(url_for('listar_membros', id_time=timeId))
 
 
-@app.route('/updatemembro/', methods=['GET', 'POST'])
-def update_membro():
-    membro_id = request.args.get('membro_id')
-    membro = membro_obter(membro_id)
-    print(membro)
+@app.route('/admin/membros/alterar/<id_membro>', methods=['GET', 'POST'])
+def alterar_membro(id_membro):
+    membro = get_membro(id_membro)
+    timeId = membro['Time_Id']
+    membros = get_membros(timeId)
 
     if request.method == 'POST':
         form = request.form
@@ -298,18 +301,21 @@ def update_membro():
         Posicao = form.get('Posicao')
         Camisa = form.get('Camisa')
 
-        alterar_membro(
+        update_membro(
             Nome,
             Apelido,
             Posicao,
             Camisa,
-            membro_id
+            id_membro
         )
-        return redirect('/')
+        return redirect( url_for('listar_membros', id_time=timeId ))
 
     return render_template(
         'parts/update-membro.html',
-        membro=membro
+        membro=membro,
+        membros=membros,
+        id_time=timeId,
+        title="Alterar"
     )
     
 # Fim Membros ------------------------------------------------------------------------------------------------------------------------------  #

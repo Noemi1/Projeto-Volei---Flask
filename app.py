@@ -1,7 +1,7 @@
 from flask import Flask, g
 from db import query_db, get_db
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 
 app.app_context().push()
 

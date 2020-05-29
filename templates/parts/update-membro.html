@@ -1,4 +1,4 @@
-{% extends 'home.html' %} {% block addTime %}
+{% extends 'membros.html' %} {% block membros %}
 <script>
     abrirModal()
 </script>
@@ -7,8 +7,6 @@
 
     <form action="" method="POST">
         <div class="linha">
-
-
             <div class="input-container col-lg-6">
                 <label for="Nome">Nome:</label>
                 <input type="text" id="Nome" name="Nome" class="inputForm" title="Nome do membro da equipe" required value="{{ membro['Nome'] }}">
