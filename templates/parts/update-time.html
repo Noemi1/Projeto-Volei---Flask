@@ -93,8 +93,9 @@
                                             <span class="icon-arrowUp"><i class="fas fa-caret-up"></i></span>
                                             <a href="{{ url_for( 'partidas', time_id=equipe['Id']) }}" class="menuActions__button" title="Ver partidas">Partidas</a>
                                             <a href=" {{ url_for('membros' , time_id=equipe['Id'])}} " class="menuActions__button">Membros</a>
-                                            <a href="{{ url_for('alterar_time', time_id=equipe[ 'Id']) }}" class="menuActions__button" title="Editar dados da equipe">Editar</a>
-                                            <a href="/time/remover/{{equipe['Id']}}/" class="menuActions__button" title="Excluir equipe">Excluir</a>
+                                            <a href="{{ url_for('alterar_time', id_time=equipe[ 'Id']) }}" class="menuActions__button" title="Editar dados da equipe">Editar</a>
+                                            <a href="{{ url_for('deletar_time', id_time=equipe[ 'Id']) }}" class="menuActions__button" title="Excluir equipe">Excluir</a>
+
                                         </div>
                                     </td>
                                     </tr>

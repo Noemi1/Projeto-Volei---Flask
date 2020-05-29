@@ -4,12 +4,12 @@ from dao import *
 
 @app.route('/')
 def index():
-    return redirect(url_for('listagem_times'))
+    return redirect(url_for('listar_times'))
     
 
 @app.route('/admin/times')
-def listagem_times():
-    equipes = listar_times()
+def listar_times():
+    equipes = get_times()
     return render_template(
         'home.html',
         title="Página Inicial",
@@ -21,7 +21,6 @@ def listagem_times():
 def adicionar_time():
     if request.method == 'POST':
         form = request.form
-
         Nome = form.get('Nome')
         Sigla = form.get('Sigla')
         Localidade = form.get('Localidade')
@@ -30,7 +29,7 @@ def adicionar_time():
         Vitorias = form.get('Vitorias')
         Derrotas = form.get('Derrotas')
 
-        novo_time(
+        add_time(
             Nome,
             Sigla,
             Localidade,
@@ -48,12 +47,10 @@ def adicionar_time():
 
 @app.route('/admin/alterar/<id_time>', methods=['GET', 'POST'])
 def alterar_time(id_time):
-    # time_id = request.args.get("time_id")
-    time = obter_time(id_time)
+    time = get_time(id_time)
 
     if request.method == 'POST':
         form = request.form
-
         Nome = form.get('Nome')
         Sigla = form.get('Sigla')
         Localidade = form.get('Localidade')
@@ -80,9 +77,9 @@ def alterar_time(id_time):
         time=time
     )
 
-@app.route('/time/remover/<time_id>/')
-def delete_time(time_id):
-    remover_time(time_id)
+@app.route('/admin/times/remover/<id_time>/')
+def remover_time(id_time):
+    delete_time(id_time)
     return redirect('/')
 
 
@@ -95,7 +92,7 @@ def delete_time(time_id):
 def partidas():
     time_id = request.args.get('time_id')
     partidas = listar_partidas(time_id)
-    timeCasa = obter_time(time_id)
+    timeCasa = get_time(time_id)
     return render_template(
         'partidas.html',
         title="Partidas",
@@ -113,7 +110,7 @@ def delete_partida(partida_id):
 @app.route('/addpartidas/', methods=['GET', 'POST'])
 def addpartidas():
     time_casa = request.args.get("time_id")
-    casa = obter_time(time_casa)
+    casa = get_time(time_casa)
     visita = times_menosUm(time_casa)
     # visita = listar_times()
 
@@ -201,7 +198,7 @@ def add_membro():
 @app.route('/membros')
 def membros():
     time_id = request.args.get('time_id')
-    time = obter_time(time_id)
+    time = get_time(time_id)
     membros = obter_membros(time_id)
     return render_template(
         'membros.html',
@@ -221,8 +218,8 @@ def detalhes():
     detalhesPartida = ver_resultado(partidaId)
     equipeCasa = listar_membros(detalhesPartida['TimeCasa_Id'])
     equipeAdversaria = listar_membros(detalhesPartida['TimeVisitantes_Id'])
-    timeCasa = obter_time(detalhesPartida['TimeCasa_Id'])
-    timeAdversario = obter_time(detalhesPartida['TimeVisitantes_Id'])
+    timeCasa = get_time(detalhesPartida['TimeCasa_Id'])
+    timeAdversario = get_time(detalhesPartida['TimeVisitantes_Id'])
     return render_template('partidas-detalhes.html',
                            title="Detalhes",
                            equipeCasa=equipeCasa,
@@ -240,7 +237,7 @@ def alt_partidas():
     partida_id = request.args.get('partida_id')
     partida = obter_partida(partida_id)
     times = listar_times()
-    casa = obter_time(partida_id)
+    casa = get_time(partida_id)
 
     if request.method == 'POST':
         form = request.form

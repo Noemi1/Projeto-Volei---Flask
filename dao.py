@@ -1,44 +1,37 @@
 from flask import g
 from db import query_db, execute_db
 
-
-def listar_membros(time_id):
-    return g.query_db(
-        'SELECT * FROM Membros WHERE Time_Id = ?',
-        [time_id]
-    )
-
-# --------------------------TIME -------------------
-
-def listar_times():
+# Times ------------------------------------------------------------------------------------------------------------------------------  #
+# Listar Times
+def get_times():
     return g.query_db(
         'SELECT * FROM Equipes ORDER BY Pontos DESC'
     )
 
-
-def obter_time(time_id):
+# Get time
+def get_time(time_id):
     return g.query_db(
         '''SELECT * FROM Equipes WHERE Id = ?''',
         [time_id],
         one=True
     )
 
-
-def novo_time(nome, sigla, localidade, pontos, jogos, vitorias, derrotas):
+# Add Time
+def add_time(nome, sigla, localidade, pontos, jogos, vitorias, derrotas):
     execute_db(
         ''' INSERT INTO Equipes (Nome, Sigla, Localidade, Pontos, Jogos, Vitorias, Derrotas)
             VALUES (?, ?, ?, ?, ?, ? , ?) ''',
         (nome, sigla, localidade, pontos, jogos, vitorias, derrotas)
     )
 
-
-def remover_time(time_id):
+# Delete Time
+def delete_time(time_id):
     execute_db(
         ''' DELETE FROM Equipes WHERE Id = ? ''',
         (time_id)
     )
 
-
+# Update Time
 def update_time(nome, sigla, localidade, pontos, jogos, vitorias, derrotas, time_id):
     execute_db(
         '''
@@ -53,6 +46,14 @@ def update_time(nome, sigla, localidade, pontos, jogos, vitorias, derrotas, time
             WHERE Id = ?
               ''',
         (nome, sigla, localidade, pontos, jogos, vitorias, derrotas, time_id)
+    )
+
+# Fim Times ------------------------------------------------------------------------------------------------------------------------------  #
+
+def listar_membros(time_id):
+    return g.query_db(
+        'SELECT * FROM Membros WHERE Time_Id = ?',
+        [time_id]
     )
 
 
