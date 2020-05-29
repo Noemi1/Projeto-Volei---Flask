@@ -10,11 +10,12 @@ def get_times():
 
 # Get time
 def get_time(time_id):
-    return g.query_db(
+    time = g.query_db(
         '''SELECT * FROM Equipes WHERE Id = ?''',
         [time_id],
         one=True
     )
+    return time
 
 # Add Time
 def add_time(nome, sigla, localidade, pontos, jogos, vitorias, derrotas):
@@ -59,6 +60,34 @@ def listar_membros(time_id):
 
 # ----------------------------------------PARTIDAS ---------------------------
 
+# Get Partida 
+def get_partida(partida_rowId):
+    partida = g.query_db(
+        '''
+            SELECT *
+              FROM Partidas
+             WHERE RowId = ?
+        ''',
+        [partida_rowId],
+        one=True
+    )
+    return partida
+
+
+# Get Partidas
+def get_partidas(time_id):
+    partidas = g.query_db(
+        '''
+            SELECT *
+              FROM Partidas
+               INNER JOIN Equipes on Equipes.Id = Partidas.TimeCasa_Id
+             WHERE TimeCasa_Id = ?
+        ''',
+        [time_id]
+    )
+    return partidas
+
+
 # Add Partida
 def add_partida(TimeCasa_Id,
             TimeVisitantes_Id,
@@ -96,40 +125,26 @@ def add_partida(TimeCasa_Id,
         )
     )
 
-
-def remover_partida(partida_id):
-    execute_db(
-        ''' DELETE FROM Partidas WHERE Id = ? ''',
-        (partida_id)
-    )
-
-
-def ver_resultado(partida_id):
-    return g.query_db(
+# Delete Partida
+def delete_partida(partida_rowId):
+    oi =  g.query_db(
         '''
             SELECT *
               FROM Partidas
-             WHERE Id = ?
+             WHERE RowId = ?
         ''',
-        [partida_id],
+        [partida_rowId],
         one=True
     )
-
-
-def get_partidas(time_id):
-    partidas = g.query_db(
-        '''
-            SELECT *
-              FROM Partidas
-               INNER JOIN Equipes on Equipes.Id = Partidas.TimeCasa_Id
-             WHERE TimeCasa_Id = ?
-        ''',
-        [time_id]
+    print(oi)
+    execute_db(
+        ''' DELETE FROM Partidas WHERE RowId = ? ''',
+        (partida_rowId)
     )
-    return partidas
 
+# Update Partida
 
-def update_partida(TimeCasa_Id, TimeVisitantes_Id, Pontos_Casa, Pontos_Visitante, DataJogo, LocalJogo, Duracao, SetsTotal, SetsVencidos, SetsPerdidos, ArbitroPrincipal, FiscalRede, Vencedor, Partida_Id):
+def update_partida(TimeCasa_Id, TimeVisitantes_Id, Pontos_Casa, Pontos_Visitante, DataJogo, LocalJogo, Duracao, SetsTotal, SetsVencidos, SetsPerdidos, ArbitroPrincipal, FiscalRede, Vencedor, Partida_rowId):
     return execute_db(
         '''
             UPDATE Partidas
@@ -147,11 +162,24 @@ def update_partida(TimeCasa_Id, TimeVisitantes_Id, Pontos_Casa, Pontos_Visitante
                 ArbitroPrincipal = ?,  
                 FiscalRede = ?,  
                 Vencedor = ?
-            WHERE Id = ?
+            WHERE RowId = ?
               ''',
         (TimeCasa_Id, TimeVisitantes_Id, Pontos_Casa, Pontos_Visitante, DataJogo, LocalJogo, Duracao,
-         SetsTotal, SetsVencidos, SetsPerdidos, ArbitroPrincipal, FiscalRede, Vencedor, Partida_Id)
+         SetsTotal, SetsVencidos, SetsPerdidos, ArbitroPrincipal, FiscalRede, Vencedor, Partida_rowId)
     )
+
+
+def ver_resultado(partida_rowId):
+    return g.query_db(
+        '''
+            SELECT *
+              FROM Partidas
+             WHERE RowId = ?
+        ''',
+        [partida_rowId],
+        one=True
+    )
+
 
 
 def obter_partida(id_partida):

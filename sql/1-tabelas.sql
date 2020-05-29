@@ -23,6 +23,7 @@ CREATE TABLE  Membros (
 
 CREATE TABLE  Partidas (
     Id                  INTEGER PRIMARY KEY
+    , RowId INT
     , TimeCasa_Id           INT NOT NULL
     , TimeVisitantes_Id     INT NOT NULL
     , Pontos_Casa         INT NOT NULL

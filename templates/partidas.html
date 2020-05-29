@@ -53,7 +53,7 @@
                         <table class="table__list" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
+                                    <th>RowId</th>
                                     <th>Casa</th>
                                     <th>Visitante</th>
                                     <th>Data</th>
@@ -67,7 +67,7 @@
                             <tbody>
                                 {% for i in partidas %}
                                 <tr>
-                                    <td> {{ i['Id']}} </td>
+                                    <td> {{ i['RowId']}} </td>
                                     <td> {{ i['TimeCasa_Id']}} </td>
                                     <td> {{ i['TimeVisitantes_Id']}} </td>
                                     <td> {{ i['DataJogo']}} </td>
@@ -81,9 +81,9 @@
                                         </button>
                                         <div class="menuActions" menuaction="0">
                                             <span class="icon-arrowUp"><i class="fas fa-caret-up"></i></span>
-                                            <a href="/partidas/remover/{{i['Id']}}" class="menuActions__button">Excluir</a>
-                                            <a href="{{url_for('alt_partidas', partida_id=i['Id'])}}" class="menuActions__button">Editar</a>
-                                            <a href="{{ url_for('detalhes', detalhes=i['Id']) }}" class="menuActions__button">Detalhes</a>
+                                            <a href="{{ url_for('detalhes', partida_rowId=i['RowId']) }}" class="menuActions__button">Detalhes</a>
+                                            <a href="{{url_for('alterar_partida', partida_rowId=i['RowId'])}}" class="menuActions__button">Editar</a>
+                                            <a href="{{ url_for('remover_partida', partida_rowId=i['RowId'] ) }}" class="menuActions__button">Excluir</a>
                                         </div>
                                     </td>
                                 </tr>
