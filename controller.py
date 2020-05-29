@@ -1,9 +1,14 @@
 from flask import Flask, render_template, request, url_for, redirect
 from app import app
-from dao import listar_partidas, listar_membros, listar_times, ver_resultado, obter_time, novo_time, remover_time, nova_partida, remover_partida, update_time, obter_partida, update_partida, novo_membro, obter_membros, remover_membro, membro_obter, alterar_membro, times_menosUm
+from dao import *
 
 @app.route('/')
 def index():
+    return redirect(url_for('listagem_times'))
+    
+
+@app.route('/admin/times')
+def listagem_times():
     equipes = listar_times()
     return render_template(
         'home.html',
@@ -12,15 +17,8 @@ def index():
     )
 
 
-@app.route('/time/remover/<time_id>/')
-def delete_time(time_id):
-    remover_time(time_id)
-    return redirect('/')
-
-
-@app.route('/addTime/', methods=['GET', 'POST'])
-def addTime():
-
+@app.route('/admin/time/novo', methods=['GET', 'POST'])
+def adicionar_time():
     if request.method == 'POST':
         form = request.form
 
@@ -45,9 +43,15 @@ def addTime():
 
     return render_template(
         'parts/add-time.html',
-        curso={},
-        title='Alterar'
+        title='Adicionar'
     )
+
+
+
+@app.route('/time/remover/<time_id>/')
+def delete_time(time_id):
+    remover_time(time_id)
+    return redirect('/')
 
 
 @app.route('/alterar/', methods=['GET', 'POST'])
