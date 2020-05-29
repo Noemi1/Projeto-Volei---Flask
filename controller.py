@@ -7,6 +7,7 @@ def index():
     return redirect(url_for('listar_times'))
     
 
+# Times ------------------------------------------------------------------------------------------------------------------------------  #
 @app.route('/admin/times')
 def listar_times():
     equipes = get_times()
@@ -82,16 +83,14 @@ def remover_time(id_time):
     delete_time(id_time)
     return redirect('/')
 
+# Fim Times ------------------------------------------------------------------------------------------------------------------------------  #
 
+# Partidas ------------------------------------------------------------------------------------------------------------------------------  #
 
-
-# ----------------------- PARTIDAS ----------------------------
-
-
-@app.route('/partidas')  # Nao consigo colocar o /partidas/<time_id>
-def partidas():
-    time_id = request.args.get('time_id')
-    partidas = listar_partidas(time_id)
+@app.route('/admin/partidas')
+def listar_partidas():
+    time_id = request.args.get('id_time')
+    partidas = get_partidas(time_id)
     timeCasa = get_time(time_id)
     return render_template(
         'partidas.html',
@@ -101,60 +100,63 @@ def partidas():
     )
 
 
+@app.route('/admin/partidas/novo', methods=['GET', 'POST'])
+def adicionar_partida():
+    id_time = request.args.get("id_time")
+    casa = get_time(id_time)
+    visita = times_menosUm(id_time)
+    partidas = get_partidas(id_time)
+
+    if request.method == 'POST':
+        form = request.form
+        TimeCasa_Id = form.get('TimeCasa_Id')
+        TimeVisitantes_Id = form.get('TimeVisitantes_Id')
+        Pontos_Casa = form.get('Pontos_Casa')
+        Pontos_Visitante = form.get('Pontos_Visitante')
+        DataJogo = form.get('DataJogo')
+        LocalJogo = form.get('LocalJogo')
+        Duracao = form.get('Duracao')
+        SetsTotal = form.get('SetsTotal')
+        SetsVencidos = form.get('SetsVencidos')
+        SetsPerdidos = form.get('SetsPerdidos')
+        ArbitroPrincipal = form.get('ArbitroPrincipal')
+        FiscalRede = form.get('FiscalRede')
+        Vencedor = form.get('Vencedor')
+
+        add_partida(
+            TimeCasa_Id,
+            TimeVisitantes_Id,
+            Pontos_Casa,
+            Pontos_Visitante,
+            DataJogo,
+            LocalJogo,
+            Duracao,
+            SetsTotal,
+            SetsVencidos,
+            SetsPerdidos,
+            ArbitroPrincipal,
+            FiscalRede,
+            Vencedor
+        )
+        return redirect( url_for( 'listar_partidas', id_time=TimeCasa_Id))
+
+    return render_template(
+        'parts/add-partidas.html',
+        title='Alterar',
+        casa=casa,
+        visita=visita,
+        partidas=partidas,
+        timeCasa=casa
+    )
+
+
 @app.route('/partidas/remover/<partida_id>/')
 def delete_partida(partida_id):
     remover_partida(partida_id)
     return redirect('/')
 
 
-@app.route('/addpartidas/', methods=['GET', 'POST'])
-def addpartidas():
-    time_casa = request.args.get("time_id")
-    casa = get_time(time_casa)
-    visita = times_menosUm(time_casa)
-    # visita = listar_times()
-
-    if request.method == 'POST':
-        form = request.form
-
-        nomeCasa = form.get('nomeCasa')
-        pontosCasa = form.get('pontosCasa')
-        nomeVisitante = form.get('nomeVisitante')
-        pontosVisitantes = form.get('pontosVisitantes')
-        data = form.get('data')
-        localpartida = form.get('localpartida')
-        duracao = form.get('duracao')
-        setstotal = form.get('setstotal')
-        setsvencidos = form.get('setsvencidos')
-        setsperdidos = form.get('setsperdidos')
-        arbitro = form.get('arbitro')
-        fiscal = form.get('fiscal')
-        vencedor = form.get('vencedor')
-
-        nova_partida(
-            nomeCasa,
-            pontosCasa,
-            nomeVisitante,
-            pontosVisitantes,
-            data,
-            localpartida,
-            duracao,
-            setstotal,
-            setsvencidos,
-            setsperdidos,
-            arbitro,
-            fiscal,
-            vencedor
-        )
-        return redirect('/')
-
-    return render_template(
-        'parts/add-partidas.html',
-        casa=casa,
-        visita=visita,
-        title='Alterar'
-    )
-
+# Fim Partidas ------------------------------------------------------------------------------------------------------------------------------  #
 
 # --------------- ENTRAR-------------
 

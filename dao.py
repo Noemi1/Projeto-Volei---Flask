@@ -59,16 +59,41 @@ def listar_membros(time_id):
 
 # ----------------------------------------PARTIDAS ---------------------------
 
-def nova_partida(TimeCasa_Id, Pontos_Casa, TimeVisitantes_Id, Pontos_Visitante, DataJogo, LocalJogo, Duracao, SetsTotal, SetsVencidos, SetsPerdidos, ArbitroPrincipal, FiscalRede, Vencedor):
+# Add Partida
+def add_partida(TimeCasa_Id,
+            TimeVisitantes_Id,
+            Pontos_Casa,
+            Pontos_Visitante,
+            DataJogo,
+            LocalJogo,
+            Duracao,
+            SetsTotal,
+            SetsVencidos,
+            SetsPerdidos,
+            ArbitroPrincipal,
+            FiscalRede,
+            Vencedor):
     execute_db(
         '''
-        INSERT INTO Partidas
-        (TimeCasa_Id, TimeVisitantes_Id, Pontos_Casa, Pontos_Visitante, DataJogo, LocalJogo, Duracao, SetsTotal, SetsVencidos, SetsPerdidos, ArbitroPrincipal, FiscalRede, Vencedor)
-        VALUES
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO Partidas
+                (TimeCasa_Id, TimeVisitantes_Id, Pontos_Casa, Pontos_Visitante, DataJogo, LocalJogo, Duracao, SetsTotal, SetsVencidos, SetsPerdidos, ArbitroPrincipal, FiscalRede, Vencedor)
+            VALUES
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''',
-        (TimeCasa_Id, TimeVisitantes_Id, Pontos_Casa, Pontos_Visitante, DataJogo, LocalJogo,
-         Duracao, SetsTotal, SetsVencidos, SetsPerdidos, ArbitroPrincipal, FiscalRede, Vencedor)
+        (   TimeCasa_Id,
+            TimeVisitantes_Id,
+            Pontos_Casa,
+            Pontos_Visitante,
+            DataJogo,
+            LocalJogo,
+            Duracao,
+            SetsTotal,
+            SetsVencidos,
+            SetsPerdidos,
+            ArbitroPrincipal,
+            FiscalRede,
+            Vencedor
+        )
     )
 
 
@@ -76,9 +101,6 @@ def remover_partida(partida_id):
     execute_db(
         ''' DELETE FROM Partidas WHERE Id = ? ''',
         (partida_id)
-    )
-    oi = g.query_db(
-        ''' SELECT *  FROM Partidas '''
     )
 
 
@@ -94,7 +116,7 @@ def ver_resultado(partida_id):
     )
 
 
-def listar_partidas(time_id):
+def get_partidas(time_id):
     partidas = g.query_db(
         '''
             SELECT *

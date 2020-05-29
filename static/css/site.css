@@ -463,11 +463,15 @@ input.touched:valid {
     color: #013182;
 }
 
-input.touched:invalid {
+input.touched:invalid,
+select.touched:invalid,
+textarea.touched:invalid {
     border-color: red;
 }
 
-input.touched:valid {
+input.touched:valid,
+select.touched:valid,
+textarea.touched:valid {
     border-color: green;
 }
 
@@ -699,5 +703,9 @@ body.modal--open {
 }
 
 textarea#nomeCasa {
+    height: 42px;
+}
+
+.input-container textarea {
     height: 42px;
 }
