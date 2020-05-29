@@ -46,18 +46,10 @@ def adicionar_time():
         title='Adicionar'
     )
 
-
-
-@app.route('/time/remover/<time_id>/')
-def delete_time(time_id):
-    remover_time(time_id)
-    return redirect('/')
-
-
-@app.route('/alterar/', methods=['GET', 'POST'])
-def alterar_time():
-    time_id = request.args.get("time_id")
-    time = obter_time(time_id)
+@app.route('/admin/alterar/<id_time>', methods=['GET', 'POST'])
+def alterar_time(id_time):
+    # time_id = request.args.get("time_id")
+    time = obter_time(id_time)
 
     if request.method == 'POST':
         form = request.form
@@ -78,7 +70,7 @@ def alterar_time():
             Jogos,
             Vitorias,
             Derrotas,
-            time_id
+            id_time
         )
         return redirect('/')
 
@@ -87,6 +79,14 @@ def alterar_time():
         title='Alterar time',
         time=time
     )
+
+@app.route('/time/remover/<time_id>/')
+def delete_time(time_id):
+    remover_time(time_id)
+    return redirect('/')
+
+
+
 
 # ----------------------- PARTIDAS ----------------------------
 
